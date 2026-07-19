@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>태초에 — 우주론과 신앙 — 대학생 버전</title>
+<style>
+:root {
+  --primary:#453a80; --primary-light:#8d84c0; --primary-xlight:#e9e6f7; --primary-dark:#251d4d;
+  --accent:#e76f51; --sky:#4895ef; --sky-light:#cce5ff;
+  --gold:#f4a261; --gold-light:#fde9d4; --purple:#7b2d8b; --purple-light:#e8d5ed;
+  --bg:#f9fafb; --card:#ffffff; --text:#1a1a2e; --muted:#6c757d;
+  --border:#dee2e6; --radius:12px; --shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);}
+a{color:var(--primary);}
+
+.site-header{background:linear-gradient(135deg,#251d4d 0%,#453a80 100%);color:#fff;padding:48px 24px 36px;text-align:center;}
+.site-header h1{font-size:2rem;font-weight:800;margin-bottom:8px;}
+.site-header p{opacity:.85;font-size:.95rem;max-width:560px;margin:0 auto;line-height:1.7;}
+.level-badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 16px;font-size:.8rem;margin-top:14px;}
+
+nav{background:#fff;border-bottom:2px solid var(--primary-xlight);position:sticky;top:0;z-index:100;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.nav-inner{display:flex;gap:0;width:fit-content;max-width:100%;margin:0 auto;padding:0 12px;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-inner::after{content:'';flex:0 0 16px;}
+nav a{display:inline-block;padding:11px 9px;font-size:.78rem;font-weight:600;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s;}
+nav a:hover,nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+main{max-width:900px;margin:0 auto;padding:40px 20px 80px;}
+section{margin-bottom:56px;}
+.section-title{font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:6px;}
+.section-subtitle{font-size:.92rem;color:var(--muted);margin-bottom:20px;}
+h3{font-size:1.1rem;font-weight:700;margin:20px 0 10px;}
+h4{font-size:.97rem;font-weight:700;margin:16px 0 8px;}
+p{line-height:1.8;margin-bottom:10px;font-size:.95rem;}
+ul,ol{padding-left:22px;line-height:1.8;font-size:.93rem;}
+li{margin-bottom:4px;}
+
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:16px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+.accent-card{border-left:4px solid var(--accent);}
+.sky-card{border-left:4px solid var(--sky);}
+.gold-card{border-left:4px solid var(--gold);}
+.purple-card{border-left:4px solid var(--purple);}
+.primary-card{border-left:4px solid var(--primary);}
+
+.heb{font-size:1.2rem;font-weight:700;color:var(--primary);background:var(--primary-xlight);padding:2px 8px;border-radius:6px;direction:rtl;unicode-bidi:bidi-override;}
+.heb-row{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin:10px 0;}
+.heb-label{font-size:.82rem;color:var(--muted);margin-left:2px;}
+
+.blockquote{background:var(--primary-xlight);border-left:4px solid var(--primary);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:16px 0;}
+.blockquote p{font-style:italic;margin-bottom:6px;}
+.blockquote cite{font-size:.82rem;color:var(--muted);}
+.blockquote.sky{background:var(--sky-light);border-color:var(--sky);}
+.blockquote.gold{background:var(--gold-light);border-color:var(--gold);}
+.blockquote.purple{background:var(--purple-light);border-color:var(--purple);}
+
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:0;overflow-x:auto;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{padding:10px 18px;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;transition:.2s;white-space:nowrap;font-family:inherit;}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
+.tab-panel{display:none;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:22px;}
+.tab-panel.active{display:block;}
+
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;}
+.acc-btn{width:100%;text-align:left;padding:15px 18px;background:var(--card);border:none;font-size:.93rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit;}
+.acc-btn:hover{background:#f6f5fb;}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;padding:0 18px;background:#fbfaff;}
+.acc-body.open{padding:16px 18px;}
+.acc-arrow{font-size:.75rem;color:var(--muted);transition:transform .25s;flex-shrink:0;}
+
+.timeline{position:relative;margin:20px 0;padding-left:26px;border-left:2px solid var(--primary-xlight);}
+.t-item{position:relative;margin-bottom:20px;}
+.t-item::before{content:'';position:absolute;left:-32px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary-xlight);}
+.t-year{font-size:.78rem;font-weight:800;color:var(--primary);letter-spacing:.3px;}
+.t-text{font-size:.89rem;line-height:1.65;margin-top:2px;}
+
+.debate{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+@media(max-width:640px){.debate{grid-template-columns:1fr;}}
+.debate-box{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
+.debate-box.pro{border-top:3px solid var(--primary);}
+.debate-box.con{border-top:3px solid var(--accent);}
+.debate-label{font-size:.75rem;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px;}
+.debate-box.pro .debate-label{color:var(--primary);}
+.debate-box.con .debate-label{color:var(--accent);}
+
+.spectrum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:16px 0;}
+.spec-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;border-top:4px solid var(--primary-light);}
+.spec-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px;}
+.spec-title{font-size:.98rem;font-weight:800;margin-bottom:8px;}
+.spec-body{font-size:.87rem;color:#444;line-height:1.65;}
+
+.scripture{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:14px 18px;margin:12px 0;font-size:.92rem;line-height:1.8;}
+.scripture cite{font-size:.8rem;color:var(--muted);display:block;margin-top:4px;}
+
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.gloss-item{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;border-top:3px solid var(--primary-light);}
+.gloss-term{font-weight:700;font-size:.95rem;margin-bottom:4px;}
+.gloss-orig{font-size:.78rem;color:var(--muted);}
+.gloss-def{font-size:.85rem;color:#444;line-height:1.6;}
+
+.person-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.person-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:8px;border-top:3px solid var(--primary-light);}
+.person-name{font-weight:800;font-size:1rem;}
+.person-role{font-size:.8rem;color:var(--muted);}
+.person-contrib{font-size:.87rem;line-height:1.6;}
+
+.discuss-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:14px;border-left:4px solid var(--purple);}
+.discuss-num{font-size:.78rem;font-weight:700;color:var(--purple);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.discuss-q{font-size:.97rem;font-weight:700;margin-bottom:8px;}
+.discuss-hint{font-size:.85rem;color:var(--muted);line-height:1.6;}
+
+.ref-group{margin-bottom:22px;}
+.ref-group-title{font-size:.78rem;font-weight:700;color:var(--primary);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--primary-xlight);}
+.ref-item{font-size:.875rem;line-height:1.75;padding:7px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;}
+.ref-item:last-child{border-bottom:none;}
+.ref-num{font-weight:800;color:var(--primary);min-width:22px;display:inline-block;flex-shrink:0;}
+.ref-warning{background:var(--gold-light);border:1px solid var(--gold);border-radius:var(--radius);padding:14px 18px;font-size:.85rem;color:#6b4c1a;margin-top:20px;line-height:1.6;}
+
+.quiz-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px;}
+.q-num{font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:6px;}
+.q-text{font-size:1rem;font-weight:700;margin-bottom:14px;line-height:1.5;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{text-align:left;padding:12px 16px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-size:.9rem;cursor:pointer;transition:.18s;font-family:inherit;}
+.q-opt:hover:not(:disabled){border-color:var(--primary);background:var(--primary-xlight);}
+.q-opt.correct{border-color:#2d6a4f;background:#d8f3dc;color:#2d6a4f;font-weight:700;}
+.q-opt.wrong{border-color:#e63946;background:#ffe0e3;color:#c1121f;}
+.q-feedback{margin-top:12px;padding:10px 14px;border-radius:8px;background:var(--primary-xlight);font-size:.88rem;border-left:3px solid var(--primary);}
+.score-box{background:var(--primary);color:#fff;border-radius:var(--radius);padding:28px;text-align:center;margin-top:24px;display:none;}
+.score-num{font-size:2.8rem;font-weight:800;margin-bottom:4px;}
+
+footer{background:var(--primary-dark);color:rgba(255,255,255,.75);text-align:center;padding:20px;font-size:.82rem;}
+footer a{color:rgba(255,255,255,.9);text-decoration:none;}
+
+@media(max-width:640px){.debate{grid-template-columns:1fr;}}
+@media(max-width:480px){
+  .site-header{padding:28px 16px 24px;} .site-header h1{font-size:1.5rem;} .site-header p{font-size:.88rem;}
+  .level-badge{font-size:.75rem;} main{padding:20px 14px 60px;} section{margin-bottom:40px;}
+  .section-title{font-size:1.2rem;} .card{padding:14px 16px;} .blockquote{padding:14px 16px;}
+  .tab-btn{font-size:.78rem;padding:8px 12px;} .acc-btn{padding:12px 14px;font-size:.88rem;}
+  .acc-body.open{padding:12px 14px;} .quiz-card{padding:16px;} .q-opt{padding:9px 12px;font-size:.85rem;}
+  .discuss-card{padding:16px;} .person-card{padding:14px;} .gloss-item{padding:12px;} .heb{font-size:1.05rem;}
+  .timeline{padding-left:20px;} .t-item::before{left:-26px;}
+}
+</style>
+</head>
+<body>
+
+<div style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+  <a href="https://isaac-math.github.io/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
+  <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
+  <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;
+     display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);
+     border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:4px 12px;">🏠 홈으로</a>
+  <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
+  <span style="color:rgba(255,255,255,.7);font-size:.82rem;">태초에 — 우주론과 신앙 — 대학생 버전</span>
+</div>
+
+<div class="site-header">
+  <h1>태초에 — 우주론과 신앙</h1>
+  <p>빅뱅, 미세조정, 그리고 '처음'의 신학. 우주에 시작이 있다는 20세기 최대의 과학적 발견은 신학에 무엇을 주고, 무엇을 주지 않는가.</p>
+  <span class="level-badge">대학생 버전</span>
+</div>
+
+<nav><div class="nav-inner">
+  <a href="#s0" onclick="setActive(this)">소개</a>
+  <a href="#s1" onclick="setActive(this)">우주론사</a>
+  <a href="#s2" onclick="setActive(this)">르메트르</a>
+  <a href="#s3" onclick="setActive(this)">증거 삼각대</a>
+  <a href="#s4" onclick="setActive(this)">창세기와 우주관</a>
+  <a href="#s5" onclick="setActive(this)">무로부터의 창조</a>
+  <a href="#s6" onclick="setActive(this)">칼람 논증</a>
+  <a href="#s7" onclick="setActive(this)">미세조정</a>
+  <a href="#s8" onclick="setActive(this)">다중우주</a>
+  <a href="#s9" onclick="setActive(this)">최신 동향</a>
+  <a href="#s10" onclick="setActive(this)">새 창조</a>
+  <a href="#s11" onclick="setActive(this)">관계 유형론</a>
+  <a href="#s12" onclick="setActive(this)">학자</a>
+  <a href="#s13" onclick="setActive(this)">용어</a>
+  <a href="#s14" onclick="setActive(this)">토론 논제</a>
+  <a href="#s_ref" onclick="setActive(this)">레퍼런스</a>
+</div></nav>
+
+<main>
+
+<!-- S0 -->
+<section id="s0">
+<div class="section-title">S0 · 도입 — 두 개의 '태초'</div>
+<p class="section-subtitle">20세기 과학의 대반전 앞에서</p>
+
+<p>20세기 초까지 물리학의 기본 전제는 우주가 영원하고 정적이라는 것이었다. 아인슈타인조차 1917년 자신의 일반상대성이론 방정식이 우주의 팽창이나 수축을 암시하자, 이를 막기 위해 임의로 '우주상수'라는 항을 추가했다 — 훗날 그는 이를 "내 인생 최대의 실수"라 불렀다고 전해진다. 그러나 1920년대를 지나며 증거는 한 방향을 가리켰다: 우주에는 시작이 있었다.</p>
+
+<p>이 발견 앞에서 무신론과 유신론 양쪽 모두 곤혹과 유혹을 동시에 겪었다. 정적 우주를 전제해온 일부 무신론 과학자들에게 '시작'은 불편한 함의를 지녔고(호일이 빅뱅을 끝까지 거부하며 정상우주론을 고수했던 배경 중 하나다), 반대로 일부 유신론자들에게 빅뱅은 "마침내 창조가 증명되었다"는 성급한 결론의 유혹이 되었다. 이 시리즈는 두 유혹 모두를 경계한다.</p>
+
+<div class="primary-card card">
+<h4>방법론 선언 (EC 시리즈에서 계승)</h4>
+<ul>
+<li><strong>장르 인식</strong> — 창세기 1장이 어떤 종류의 문헌인지 먼저 묻는다.</li>
+<li><strong>일치주의 경계</strong> — 당대 과학을 성경 본문에 직접 대입하는 해석을 경계한다.</li>
+<li><strong>미해결의 정직한 표기</strong> — 확정된 과학과 '전선(前線)의 과학'을 구별하고, 후자는 진행 중인 논쟁으로 서술한다.</li>
+</ul>
+</div>
+</section>
+
+<!-- S1 -->
+<section id="s1">
+<div class="section-title">S1 · 우주론 200년사</div>
+<p class="section-subtitle">정적 우주에서 팽창하는 우주로</p>
+
+<div class="timeline">
+  <div class="t-item"><div class="t-year">1543</div><div class="t-text">코페르니쿠스, 『천구의 회전에 관하여』 — 지동설 제창.</div></div>
+  <div class="t-item"><div class="t-year">1616 / 1633</div><div class="t-text">갈릴레오 사건. 흔히 '과학 대 종교'의 상징으로 소비되지만, 실제로는 정치·인물 갈등·해석학적 논쟁이 얽힌 복합적 사건이었다는 것이 오늘날 과학사학계의 평가다(로널드 넘버스 편, 『Galileo Goes to Jail』이 이런 단순 신화들을 하나씩 교정한다).</div></div>
+  <div class="t-item"><div class="t-year">1687</div><div class="t-text">뉴턴, 『자연철학의 수학적 원리』 — 만유인력의 법칙.</div></div>
+  <div class="t-item"><div class="t-year">1915 / 1917</div><div class="t-text">아인슈타인, 일반상대성이론 발표 및 우주상수 도입(정적 우주를 유지하기 위한 인위적 항).</div></div>
+  <div class="t-item"><div class="t-year">1922 / 1927</div><div class="t-text">프리드만이 방정식의 팽창 우주 해를 수학적으로 제시(1922), 르메트르가 이를 독립적으로 재발견하고 관측 자료와 연결(1927).</div></div>
+  <div class="t-item"><div class="t-year">1929</div><div class="t-text">허블, 은하의 후퇴 속도와 거리 사이의 비례 관계를 관측으로 확립.</div></div>
+  <div class="t-item"><div class="t-year">1949</div><div class="t-text">정상우주론자 프레드 호일, BBC 라디오 방송에서 팽창-시작 이론을 비꼬며 '빅뱅'이라 명명 — 이 별명이 그대로 정착했다.</div></div>
+  <div class="t-item"><div class="t-year">1965</div><div class="t-text">펜지어스와 윌슨, 우주배경복사(CMB) 발견 — 빅뱅 이론과 정상우주론의 경쟁에 사실상 종지부를 찍은 결정적 증거.</div></div>
+  <div class="t-item"><div class="t-year">1992~2013</div><div class="t-text">COBE(1992)·WMAP·플랑크(2013) 위성이 CMB를 정밀 지도화하며 우주의 나이·구성비를 정교화.</div></div>
+  <div class="t-item"><div class="t-year">2021~</div><div class="t-text">제임스 웹 우주망원경(JWST) 가동 — 초기 우주 관측의 새 지평과 함께 새로운 논쟁도 촉발.</div></div>
+</div>
+</section>
+
+<!-- S2 -->
+<section id="s2">
+<div class="section-title">S2 · 르메트르 — 이 시리즈의 인물 축</div>
+<p class="section-subtitle">사제이자 물리학자, 두 소명을 함께 살다</p>
+
+<p>조르주 르메트르(Georges Lemaître, 1894-1966)는 가톨릭 사제 서품을 받은 동시에 케임브리지와 MIT에서 수학한 물리학자였다. 1927년, 그는 아인슈타인의 방정식으로부터 팽창하는 우주 해를 독립적으로 도출하고, 이를 슬라이퍼 등의 은하 후퇴 속도 관측 자료와 연결시켰다 — 허블의 1929년 관측보다 2년 앞선 것이었다.</p>
+
+<div class="blockquote">
+<p>"당신의 계산은 옳지만, 당신의 물리학은 끔찍하다(Your calculations are correct, but your physics is abominable)."</p>
+<cite>— 아인슈타인이 1927년 르메트르의 발표를 처음 접했을 때의 반응으로 전해짐</cite>
+</div>
+
+<p>1931년 르메트르는 한 걸음 더 나아가 우주가 하나의 '원시 원자(primeval atom)'에서 시작되었다는 가설을 제시했다 — 오늘날 빅뱅 이론의 초기 형태다.</p>
+
+<div class="acc-item">
+<button class="acc-btn" onclick="toggleAcc(this)">1951년 사건 — 과학-신앙 관계의 모범 사례 <span class="acc-arrow">▼</span></button>
+<div class="acc-body">
+<p>1951년, 교황 비오 12세는 교황청 과학원 연설에서 빅뱅 이론이 창세기의 창조 교리를 과학적으로 확증하는 듯한 뉘앙스로 언급했다. 그런데 다른 누구도 아닌 르메트르 — 사제이자 이 이론의 창시자 — 가 이 연결을 만류했다. 과학 이론은 잠정적이며 새로운 증거로 언제든 수정될 수 있는데, 신앙의 근거를 특정 과학 이론에 묶어두는 것은 위험하다는 이유였다. 이후 교황청은 이 주장을 공식적으로 반복하지 않았다.</p>
+<p>이 일화가 중요한 이유는, 정작 "빅뱅과 창조를 성급하게 동일시하지 말라"고 경고한 사람이 무신론 과학자가 아니라 그 이론을 만든 사제 자신이었다는 데 있다. S5·S9에서 이 절제된 태도로 계속 돌아올 것이다.</p>
+</div>
+</div>
+</section>
+
+<!-- S3 -->
+<section id="s3">
+<div class="section-title">S3 · 빅뱅의 증거 삼각대</div>
+<p class="section-subtitle">세 가지 독립적 증거가 하나의 결론을 가리킨다</p>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="switchTab('s3','s3t1',this)">① 우주 팽창</button>
+<button class="tab-btn" onclick="switchTab('s3','s3t2',this)">② 우주배경복사</button>
+<button class="tab-btn" onclick="switchTab('s3','s3t3',this)">③ 경원소 존재비</button>
+</div>
+<div id="s3t1" class="tab-panel active">
+<p>은하들의 스펙트럼은 적색편이(광원이 멀어질 때 파장이 늘어나는 현상)를 보이며, 그 정도는 거리에 비례한다 — 이것이 허블-르메트르 법칙이다(2018년 국제천문연맹이 이 이름으로 공식 개칭했다). 더 먼 은하일수록 더 빠르게 멀어진다는 것은 공간 자체가 팽창하고 있음을 뜻한다.</p>
+</div>
+<div id="s3t2" class="tab-panel">
+<p>1965년 발견된 우주배경복사(Cosmic Microwave Background)는 우주 전역에서 거의 균일하게 관측되는 절대온도 약 2.7K의 마이크로파 복사다. 이는 우주가 뜨겁고 밀도 높은 초기 상태에서 팽창하며 식어왔다는 예측이 먼저 있었고, 그 예측이 실제로 발견됨으로써 확증된 사례다 — 과학철학적으로 매우 강력한 형태의 증거다.</p>
+</div>
+<div id="s3t3" class="tab-panel">
+<p>빅뱅 핵합성 이론은 우주 탄생 직후 몇 분 사이에 형성된 수소와 헬륨의 비율(약 3:1)을 정확히 예측하며, 이는 실제 관측된 우주의 원소 구성비와 정밀하게 일치한다.</p>
+</div>
+
+<p>세 증거는 서로 독립적인 관측 방법에서 나왔지만 모두 같은 결론 — 우주는 약 138억 년 전 뜨겁고 밀도 높은 상태에서 시작해 팽창해왔다 — 을 가리킨다.</p>
+
+<div class="card sky-card">
+<h4>JWST '초기 거대 은하' 소동 교정 박스</h4>
+<p>2022-23년, JWST가 예상보다 이르고 무거워 보이는 초기 은하들을 관측하자 "빅뱅 우주론이 틀렸다"는 자극적인 언론 보도가 이어졌다. 그러나 후속 분광 관측과 은하 질량 추정 모델을 정교화한 결과, 초기 은하의 질량이 광도로부터 과대평가되었던 경우가 상당수였다는 것이 밝혀지며 '위기' 서사는 상당 부분 진정되었다(S9 참조). 이는 표준모형 자체의 붕괴가 아니라 은하 형성 모델의 세부 조정 문제에 가까웠다 — 과학 저널리즘을 읽을 때 성급한 결론과 실제 연구 상황을 구별하는 훈련이 필요한 지점이다.</p>
+</div>
+</section>
+
+<!-- S4 -->
+<section id="s4">
+<div class="section-title">S4 · 창세기와 고대 우주관</div>
+<p class="section-subtitle">ANE 크로스링크 섹션</p>
+
+<p>창세기 1장의 우주는 고대 근동 세계가 공유하던 3층 우주 표상 안에서 서술된다. 히브리어 본문은 하늘을 다음과 같이 묘사한다.</p>
+
+<div class="heb-row"><span class="heb">רָקִיעַ</span><span class="heb-label">라키아 — '펴서 두드려 만든 것', 궁창(창 1:6-8)</span></div>
+
+<p>폴 실리(Paul Seely)의 고전적 연구는 라키아가 단단한 반구형 천장을 가리키는 표현이며, 이것이 고대 근동에서 널리 공유된 우주론(하늘 위에 '물'이 있다는 관념 포함)과 일치한다고 논증한다. 존 월튼은 여기서 한 걸음 나아가, 창세기 1장의 관심사가 물질의 기원(material origins)이 아니라 <strong>기능의 부여</strong>(functional origins) — 이미 있는 것에 질서와 역할과 목적을 정하는 것 — 에 있다고 주장한다.</p>
+
+<div class="acc-item">
+<button class="acc-btn" onclick="toggleAcc(this)">일치주의(Concordism) 비판 <span class="acc-arrow">▼</span></button>
+<div class="acc-body">
+<p>"빛이 있으라"(창 1:3)를 빅뱅과 동일시하려는 시도처럼, 매 세대는 당대의 최신 과학을 성경 본문에 직접 읽어 넣으려는 유혹을 받아왔다. 문제는 이런 시도가 반복적으로 실패해왔다는 데 있다 — 프톨레마이오스 천문학이 성경과 조화된다고 여겨지던 시대도, 뉴턴 역학이 그렇게 여겨지던 시대도 있었다. 과학이 바뀔 때마다 성경 해석이 그 과학의 인질이 되어 함께 흔들리는 역사가 반복된 것이다. 이것이 일치주의를 경계해야 하는 이유다.</p>
+</div>
+</div>
+
+<div class="blockquote gold">
+<p>"성령은 하늘이 어떻게 도는지를 가르치려 하신 것이 아니라, 하늘에 어떻게 가는지를 가르치려 하셨다."</p>
+<cite>— 갈릴레오 갈릴레이가 대공비 크리스티나에게 보낸 편지(1615)에서 바로니우스 추기경의 말을 인용</cite>
+</div>
+
+<h3>신자 스펙트럼 — 공정한 비교</h3>
+<div class="spectrum-grid">
+<div class="spec-card"><div class="spec-label">입장 1</div><div class="spec-title">젊은 지구론</div><div class="spec-body">창세기의 날을 문자적 24시간으로, 계보를 통한 연대 계산을 신뢰. <strong>강점</strong>: 표면적 독법에 충실. <strong>난점</strong>: 지질학·천문학의 압도적인 증거(빛의 이동 시간, 방사성 연대측정 등)와 정면으로 충돌.</div></div>
+<div class="spec-card"><div class="spec-label">입장 2</div><div class="spec-title">오랜 지구 일치주의</div><div class="spec-body">휴 로스(Reasons to Believe)로 대표. 창세기의 '날'을 긴 시대로 해석하며 과학적 연대와 조화 시도. <strong>강점</strong>: 과학과의 정면 충돌을 피함. <strong>난점</strong>: 위 일치주의 비판이 지적하는 반복적 실패 패턴에 노출될 위험.</div></div>
+<div class="spec-card"><div class="spec-label">입장 3</div><div class="spec-title">비일치주의(월튼·EC 계열)</div><div class="spec-body">창세기 1장을 과학적 서술이 아니라 고대 근동의 우주 언어로 기능적 질서 부여를 선언하는 신학적 텍스트로 읽음. <strong>강점</strong>: 성경 본문을 원래 청중의 맥락에서 존중. <strong>난점</strong>: "그렇다면 물질적 기원 자체에 대해 성경은 침묵하는가"라는 신학적 물음이 남는다.</div></div>
+</div>
+</section>
+
+<!-- S5 -->
+<section id="s5">
+<div class="section-title">S5 · 무로부터의 창조(Creatio ex Nihilo)</div>
+<p class="section-subtitle">교리사 섹션</p>
+
+<div class="scripture">
+"태초에 하나님이 천지를 창조하시니라"<cite>— 창세기 1:1, 개역개정</cite>
+</div>
+<div class="scripture">
+"죽은 자를 살리시며 없는 것을 있는 것으로 부르시는 이시니라"<cite>— 로마서 4:17, 개역개정</cite>
+</div>
+<div class="scripture">
+"믿음으로 모든 세계가 하나님의 말씀으로 지어진 줄을 우리가 아나니 보이는 것은 나타난 것으로 말미암아 된 것이 아니니라"<cite>— 히브리서 11:3, 개역개정</cite>
+</div>
+
+<p>무로부터의 창조 교리는 이미 있는 재료를 신이 빚어낸다는 플라톤의 데미우르고스 신화(『티마이오스』)와의 대결 속에서 2세기에 명료화되었다 — 이레네우스와 테르툴리아누스가 이 정식화의 주요 인물이다. 외경 2마카비 7:28("하나님이 하늘과 땅을 있는 것들로부터 만드신 것이 아님을 보라")도 이 교리의 초기 증언으로 종종 인용된다.</p>
+
+<div class="acc-item">
+<button class="acc-btn" onclick="toggleAcc(this)">아퀴나스의 결정적 구별 <span class="acc-arrow">▼</span></button>
+<div class="acc-body">
+<p>토마스 아퀴나스는 『신학대전』(I, q.46)에서 결정적인 구별을 제시한다: 창조는 <strong>시간적 시작</strong>의 문제가 아니라 <strong>존재론적 의존</strong>의 문제라는 것이다. 그에 따르면 철학만으로는 우주가 영원했을 가능성을 배제할 수 없지만, 설령 우주가 영원하다 해도 그것은 여전히 매 순간 하나님께 존재를 의존한다 — 마치 발자국이 영원히 찍혀 있었더라도 발이 그것의 원인이듯이.</p>
+<p>이 구별의 함의는 크다: 빅뱅(시간적 시작)이 없었다 해도 창조 교리(존재론적 의존) 자체는 성립할 수 있다는 것이다. 따라서 빅뱅은 창조 교리의 '증명'이 아니라 그것과 잘 어울리는 '공명'으로 절제되게 자리매김하는 것이 신학적으로 더 정확하다.</p>
+</div>
+</div>
+</section>
+
+<!-- S6 -->
+<section id="s6">
+<div class="section-title">S6 · 칼람 우주론 논증</div>
+<p class="section-subtitle">구조 분석</p>
+
+<p>'칼람(kalām)'은 중세 이슬람 신학 전통을 가리키며, 이 논증은 11세기 알 가잘리 등에 의해 정교화되었다. 20세기 후반 윌리엄 레인 크레이그가 『The Kalam Cosmological Argument』(1979)를 통해 현대 분석철학의 언어로 부활시켰다.</p>
+
+<div class="card primary-card">
+<h4>논증의 3단계 구조</h4>
+<ol>
+<li>존재하기 시작한 모든 것에는 그 존재의 원인이 있다.</li>
+<li>우주는 존재하기 시작했다.</li>
+<li>따라서 우주에는 그 존재의 원인이 있다.</li>
+</ol>
+</div>
+
+<p>전제 2를 방어하기 위해 크레이그는 철학적 논증(무한 과거의 역설 — 실제 무한의 집합은 형성될 수 없다는 논증)과 과학적 논증(빅뱅의 특이점, 그리고 보르데-구스-빌렌킨 정리 — 평균적으로 팽창해온 우주는 과거로 무한히 확장될 수 없다는 정리)을 함께 제시한다.</p>
+
+<h3>최강 반론들</h3>
+<div class="debate">
+<div class="debate-box con">
+<div class="debate-label">반론 1 — 양자 우주론</div>
+<p>호킹과 하틀의 '무경계 가설'(1983)은 우주가 특이점 없이, 마치 지구 표면에 '북극점 이전'이 무의미하듯 시간적 경계 없는 방식으로 시작되었을 가능성을 제시한다. 호킹은 『시간의 역사』(1988)에서 이 가설이 함의하는 질문을 직접 던졌다: "그렇다면 창조자가 설 자리는 어디인가?"</p>
+</div>
+<div class="debate-box pro">
+<div class="debate-label">응답</div>
+<p>무경계 가설은 여전히 사변적인 수학적 모델(허수 시간 등 검증되지 않은 장치를 사용)이며, 로렌스 크라우스의 『무로부터의 우주』(2012)가 말하는 '무(無)'도 실제로는 양자장이 요동치는 진공 상태 — 철학적 의미의 '없음'이 아니라는 비판이 자연신학 진영에서 꾸준히 제기된다. 인과 원리를 우주 전체에 적용하는 것이 정당한가에 대한 논쟁도 남아 있다.</p>
+</div>
+</div>
+
+<div class="card gold-card">
+<h4>평가</h4>
+<p>칼람 논증이 성공한다 해도, 그것이 논증해내는 것은 "우주에 원인이 있다"는 유신론 일반의 합리성 정도이지, 그 원인이 기독교가 말하는 인격적이고 삼위일체적인 하나님이라는 특정 결론이 아니다. 논증이 주는 것과 주지 않는 것을 구별하는 것이 정직한 평가다.</p>
+</div>
+</section>
+
+<!-- S7 -->
+<section id="s7">
+<div class="section-title">S7 · 미세조정 — 우주 상수들의 수수께끼</div>
+<p class="section-subtitle">몇 개의 숫자가 조금만 달랐다면</p>
+
+<p>마틴 리스는 『Just Six Numbers』(2000)에서 우주의 구조를 결정하는 여섯 개의 근본 상수를 제시했고, 제라인트 루이스와 루크 반스는 『A Fortunate Universe』(2016)에서 이를 더 정교화했다 — 이 책은 반스(유신론자)와 루이스(무신론자)가 공저했다는 사실 자체가 미세조정 논쟁이 순전히 종교적 편향의 문제가 아님을 보여주는 흥미로운 사례다.</p>
+
+<div class="card-grid">
+<div class="card accent-card"><h4>우주상수 문제</h4><p>이론적으로 예측되는 값과 관측된 값 사이에 최대 10<sup>120</sup>배에 달하는 극단적 불일치가 존재한다 — 물리학사에서 가장 심각한 이론-관측 불일치로 꼽힌다.</p></div>
+<div class="card accent-card"><h4>강한 핵력</h4><p>조금만 강하면 별 속의 수소가 너무 빨리 소진되고, 조금만 약하면 무거운 원소가 형성되지 못한다.</p></div>
+<div class="card accent-card"><h4>탄소 공명</h4><p>프레드 호일 자신이 탄소가 존재해야 한다는 사실로부터 역으로 특정 핵공명 에너지 준위의 존재를 예측했고, 실제로 발견되었다. 정상우주론의 완강한 옹호자였던 호일조차 이 발견에 깊이 동요했다고 알려져 있다 — "우주는 마치 미리 알고 있었던 것처럼 보인다"는 취지의 발언을 남겼다.</p></div>
+</div>
+
+<h3>설명 후보 3가지</h3>
+<div class="tab-bar">
+<button class="tab-btn active" onclick="switchTab('s7','s7t1',this)">필연</button>
+<button class="tab-btn" onclick="switchTab('s7','s7t2',this)">우연(+다중우주)</button>
+<button class="tab-btn" onclick="switchTab('s7','s7t3',this)">설계</button>
+</div>
+<div id="s7t1" class="tab-panel active"><p>더 근본적인 만물의 이론(theory of everything)이 발견되면 이 상수들의 값이 논리적으로 유일하게 결정된다는 것이 밝혀질 수 있다는 입장. 현재로서는 그런 이론이 없다.</p></div>
+<div id="s7t2" class="tab-panel"><p>충분히 많은 우주(다중우주)가 존재한다면, 그중 일부는 우연히 미세조정된 값을 가질 것이고 우리는 당연히 그런 우주에서만 관측자로 존재할 수 있다는 입장(S8에서 상세히 다룸).</p></div>
+<div id="s7t3" class="tab-panel"><p>미세조정은 지적 설계자의 의도를 가리키는 증거라는 입장. 로빈 콜린스 등이 이를 베이즈 확률 논증의 형태로 정교화했다.</p></div>
+
+<div class="acc-item">
+<button class="acc-btn" onclick="toggleAcc(this)">인류 원리 — '설명'인가 '선택 효과 진술'인가 <span class="acc-arrow">▼</span></button>
+<div class="acc-body">
+<p><strong>약한 인류 원리</strong>는 단순한 관측 선택 효과를 진술한다 — 우리는 관측자가 존재할 수 있는 우주에서만 스스로를 관측할 수 있다는 것으로, 이 자체는 논리적 동어반복에 가깝다. <strong>강한 인류 원리</strong>는 더 나아가 우주가 관측자를 낳도록 어떤 의미에서 '그렇게 되어야 했다'고 주장하는데, 이는 형이상학적 해석이 개입되는 더 논쟁적인 주장이다. 미세조정 논쟁에서 이 둘을 구별하지 않으면 논증이 실제보다 강해 보이거나 약해 보이는 오류에 빠지기 쉽다.</p>
+</div>
+</div>
+</section>
+
+<!-- S8 -->
+<section id="s8">
+<div class="section-title">S8 · 다중우주 — 위협인가 사변인가</div>
+<p class="section-subtitle">과학적 지위가 서로 다른 가설들을 구별하기</p>
+
+<p>'다중우주'라는 말은 하나의 균일한 개념이 아니다. 막스 테그마크는 이를 4단계로 분류했다 — 우리 우주보다 먼 영역(1단계), 급팽창 이론이 함의하는 다른 물리상수를 가진 거품우주들(2단계), 양자역학의 다세계 해석(3단계), 수학적으로 가능한 모든 구조(4단계). 급팽창 이론의 일부 모델('영원한 급팽창')과 끈이론의 랜드스케이프(가능한 진공 상태의 방대한 경우의 수)는 2단계 다중우주의 물리학적 근거로 흔히 인용된다.</p>
+
+<div class="card sky-card">
+<h4>중요한 구별</h4>
+<p>이 분류들의 과학적 지위는 균일하지 않다. 일부(1단계, 급팽창의 특정 예측)는 원리적으로 검증 가능한 물리학에 가깝지만, 일부(4단계)는 사실상 형이상학적 사변에 가깝다. "다중우주는 과학이다/아니다"라는 이분법적 질문보다, "이 특정 다중우주 가설은 어떤 종류의 증거로 검증되거나 반증될 수 있는가"를 묻는 것이 더 생산적이다.</p>
+</div>
+
+<p>다중우주가 미세조정을 설명하는가에 대해서도 진지한 반론이 있다. 첫째, 검증 가능성 문제 — 다른 우주는 원리적으로 관측할 수 없다. 둘째, '볼츠만 두뇌' 역설 — 무한히 많은 우주를 가정하면 정상적인 관측자보다 무작위한 양자 요동으로 생겨난 '두뇌'가 압도적으로 많아야 한다는 역설적 결론에 도달한다. 셋째, 로빈 콜린스가 지적하듯 "다중우주 생성기 자체가 미세조정되어 있어야 한다"는 재귀적 문제 — 설명이 한 단계 뒤로 미뤄질 뿐이라는 비판이다.</p>
+
+<h3>신학적 응답 스펙트럼</h3>
+<div class="spectrum-grid">
+<div class="spec-card"><div class="spec-label">응답 1</div><div class="spec-title">위협론</div><div class="spec-body">다중우주가 미세조정 논증을 무력화하여 설계 논증 전체를 위협한다고 보는 입장.</div></div>
+<div class="spec-card"><div class="spec-label">응답 2</div><div class="spec-title">무관론</div><div class="spec-body">다중우주 여부와 무관하게, "왜 애초에 이런 법칙을 가진 실재가 존재하는가"라는 더 근본적인 질문은 여전히 남는다고 보는 입장.</div></div>
+<div class="spec-card"><div class="spec-label">응답 3</div><div class="spec-title">포용론</div><div class="spec-body">하나님의 풍성함(divine plenitude) 개념과 연결하여, 다중우주 자체도 창조의 범위 안에 있을 수 있다고 보는 입장. 중세의 '세계의 복수성(plurality of worlds)' 논쟁(오컴, 니콜 오렘 등이 이미 신학적으로 다룬 주제)과의 연속성이 지적된다.</div></div>
+</div>
+</section>
+
+<!-- S9 -->
+<section id="s9">
+<div class="section-title">S9 · 살아있는 우주론 — 현재의 균열들</div>
+<p class="section-subtitle">최신 동향 섹션 (2026년 상반기 기준, 진행 중인 논쟁)</p>
+
+<div class="card gold-card">
+<h4>허블 텐션</h4>
+<p>우주의 현재 팽창 속도(허블 상수)를 측정하는 두 방법 — 세페이드 변광성·초신성 등을 이용한 국소 우주 측정(값이 대략 시속 73km/Mpc 부근)과 우주배경복사로부터 표준모형을 통해 추정하는 값(대략 67km/Mpc 부근) — 사이의 불일치가 좀처럼 좁혀지지 않고 있다. 2025-26년에 발표된 새로운 중력렌즈·거리사다리 정밀 측정들도 이 불일치를 해소하기보다 오히려 재확인하거나 심화시키는 결과를 내놓고 있어, 측정 오차의 문제라기보다 표준 우주론 모형(ΛCDM)에 빠진 물리가 있을 가능성까지 진지하게 논의되고 있다. 2026년 현재 이 텐션은 <strong>미해결</strong>이다.</p>
+</div>
+
+<div class="card gold-card">
+<h4>DESI가 시사하는 '진화하는 암흑에너지'</h4>
+<p>암흑에너지 분광 기기(DESI)의 대규모 은하 지도 자료는 2024년 1차 결과(DR1)에 이어 2025년 2차 결과(DR2)에서도, 암흑에너지의 세기가 시간에 따라 일정하다는 표준 가정(우주상수 Λ)보다 시간에 따라 변화하는 모형을 다소 선호하는 통계적 경향을 계속 보여주고 있다. 그러나 이 결과를 둘러싸고 물리학계 내부에서도 이견이 존재한다 — 이 편차가 새로운 물리를 가리키는지, 아니면 다른 관측 자료와의 결합 방식이나 통계적 우연에서 비롯된 것인지에 대한 논문들이 계속 나오고 있다. 표준 우주론 모형(ΛCDM)이 실제로 흔들리고 있는지는 <strong>아직 결론이 나지 않은 진행 중인 논쟁</strong>이며, 추가 관측 자료(DESI의 후속 데이터 공개, 유클리드·베라 루빈 천문대 등)를 기다려야 한다.</p>
+</div>
+
+<div class="card sky-card">
+<h4>JWST 초기 은하 논쟁의 현재</h4>
+<p>S3에서 다룬 '초기 거대 은하' 소동은 이후 관측·분석 기법이 정교해지면서 상당 부분 진정되는 추세다 — 초기 추정된 은하 질량 중 다수가 항성종족모형의 세부 조정으로 설명 가능하다는 연구들이 이어졌다. 다만 일부 학자들은 이 관측이 '초기 암흑에너지' 모형처럼 허블 텐션과 연결된 새로운 물리의 단서일 가능성도 계속 탐구하고 있어, 이 역시 완전히 종결된 논쟁은 아니다.</p>
+</div>
+
+<div class="card primary-card">
+<h4>교육 포인트</h4>
+<p>이 섹션은 과학의 자기수정 과정을 실시간으로 보여주는 창이다. S3의 '증거 삼각대'(팽창·CMB·핵합성)는 수십 년간 반복 검증되어 사실상 확정된 과학이지만, 이 섹션의 허블 텐션·암흑에너지 논쟁은 '전선(前線)의 과학' — 아직 합의에 이르지 않은, 살아있는 연구의 최전선이다. 이 둘을 구별하는 훈련은 EC 시리즈가 진화론을 서술하는 방식과 정확히 대구를 이룬다: 확정된 것을 확정된 것으로, 논쟁 중인 것을 논쟁 중인 것으로 말하는 것 자체가 지적 정직성이다.</p>
+</div>
+</section>
+
+<!-- S10 -->
+<section id="s10">
+<div class="section-title">S10 · 우주의 끝과 새 창조</div>
+<p class="section-subtitle">종말론 섹션</p>
+
+<p>현재의 우주론적 예측에 따르면, 극히 먼 미래에 별들은 연료를 소진하고(열죽음 시나리오), 혹은 암흑에너지의 성격에 따라 우주가 갈가리 찢어지는 '빅 립' 같은 극적인 종말을 맞을 수도 있다. 이런 시나리오들은 담담하게 서술될 수 있는 물리적 예측이다.</p>
+
+<p>그러나 신학적으로 중요한 것은 물리적 미래 예측과 종말론적 소망을 같은 범주에 놓지 않는 것이다. 로버트 존 러셀(CTNS)은 이를 '종말론적 변형(eschatological transformation)'이라는 개념으로 다룬다 — 하나님의 새 창조는 현재 물리 법칙의 연장선에서 예측되는 결과가 아니라, 그 물리 법칙 자체를 초월하는 하나님의 새로운 행위라는 것이다. 존 폴킹혼도 『The God of Hope and the End of the World』(2002)에서 비슷한 논지를 전개한다.</p>
+
+<div class="scripture">
+"내가 새 하늘과 새 땅을 창조하나니 이전 것은 기억되거나 마음에 생각나지 아니할 것이라"<cite>— 이사야 65:17, 개역개정</cite>
+</div>
+<div class="scripture">
+"보라 내가 만물을 새롭게 하노라"<cite>— 요한계시록 21:5, 개역개정</cite>
+</div>
+
+<div class="acc-item">
+<button class="acc-btn" onclick="toggleAcc(this)">소멸이 아닌 변용 — ECO·JH와의 동형 논리 <span class="acc-arrow">▼</span></button>
+<div class="acc-body">
+<p>계 21장의 새 창조는 이 세계를 완전히 폐기하고 대체하는 것이 아니라 <strong>변용(transformation)</strong>시키는 것으로 읽는 것이 최근 신학의 우세한 흐름이다. 이는 ECO 시리즈가 다루는 창조 세계 돌봄의 신학, 그리고 JH 시리즈가 다루는 부활 — 옛 몸의 폐기가 아니라 변화된 몸의 부활 — 과 동형의 논리 구조를 이룬다. 고린도전서 15:58("항상 주의 일에 더욱 힘쓰는 자들이 되라 이는 너희 수고가 주 안에서 헛되지 않은 줄을 앎이라")은 이 소망이 현재의 행동을 무의미하게 만드는 것이 아니라 오히려 의미 있게 만든다는 것을 보여준다.</p>
+</div>
+</div>
+</section>
+
+<!-- S11 -->
+<section id="s11">
+<div class="section-title">S11 · 과학과 신앙의 관계 유형론</div>
+<p class="section-subtitle">이 시리즈 전체를 관통하는 틀</p>
+
+<p>이언 바버는 과학과 종교의 관계를 네 유형 — 갈등(conflict) · 독립(independence) · 대화(dialogue) · 통합(integration) — 으로 분류한 것으로 유명하다. 이 틀은 유용한 출발점이지만 한계도 있다: 존 헤들리 브룩이 『Science and Religion: Some Historical Perspectives』에서 보여주듯, 실제 역사는 이 네 상자 중 하나로 깔끔하게 분류되지 않는 훨씬 복잡한 개별 사례들의 연속이다(갈릴레오 사건 자체가 좋은 예다 — S1 참조).</p>
+
+<h3>대화 전통의 인물들</h3>
+<div class="card-grid">
+<div class="card purple-card"><h4>존 폴킹혼</h4><p>입자물리학자에서 성공회 사제로 — 과학자-신학자의 대표적 사례. 『The Faith of a Physicist』(1994)에서 과학적 사고 습관과 그리스도교 신앙의 정합성을 논한다.</p></div>
+<div class="card purple-card"><h4>알리스터 맥그래스</h4><p>『A Fine-Tuned Universe』(2009, 기포드 강연)에서 자연신학을 현대적으로 재구성한다.</p></div>
+<div class="card purple-card"><h4>프랜시스 콜린스 · 데보라 하스마</h4><p>인간 게놈 프로젝트를 이끈 콜린스와 천문학자 하스마 모두 BioLogos를 통해 과학과 신앙의 대화를 이끈다 — EC 시리즈와의 직접적 크로스링크다.</p></div>
+</div>
+
+<p>대화 전통이 특히 주목하는 것은 '경이(wonder)'의 신학이다. 아인슈타인은 "우주에 관해 가장 이해할 수 없는 것은, 우주가 이해 가능하다는 바로 그 사실이다"라는 말을 남겼다. 물리학자 유진 위그너는 이를 두고 수학이 자연을 기술하는 데 있어 보이는 "불합리한 유효성(unreasonable effectiveness)"이라 불렀다 — 왜 인간의 순수한 수학적 사고가 우주의 실제 작동 방식과 이토록 잘 들어맞는지는, 그 자체로 철학적·신학적 질문거리다.</p>
+</section>
+
+<!-- S12 -->
+<section id="s12">
+<div class="section-title">S12 · 학자 카드</div>
+<p class="section-subtitle">우주론과 신앙의 대화에 참여한 9인</p>
+<div class="person-grid">
+<div class="person-card"><div class="person-name">조르주 르메트르</div><div class="person-role">사제·물리학자 (1894-1966)</div><div class="person-contrib">팽창 우주 해(1927)·원시 원자 가설(1931). '빅뱅의 아버지'이자 이 시리즈의 인물 축.</div></div>
+<div class="person-card"><div class="person-name">에드윈 허블</div><div class="person-role">천문학자 (1889-1953)</div><div class="person-contrib">1929년 은하 후퇴 속도-거리 관계를 관측으로 확립.</div></div>
+<div class="person-card"><div class="person-name">프레드 호일</div><div class="person-role">천문학자 (1915-2001)</div><div class="person-contrib">정상우주론의 주창자이자 '빅뱅' 명명자(1949, 비꼬는 의도). 동시에 탄소 공명을 예측·발견한 입체적 인물.</div></div>
+<div class="person-card"><div class="person-name">윌리엄 레인 크레이그</div><div class="person-role">철학자·변증가</div><div class="person-contrib">칼람 우주론 논증을 현대 분석철학 언어로 부활(1979).</div></div>
+<div class="person-card"><div class="person-name">마틴 리스</div><div class="person-role">천체물리학자·전 왕립학회장</div><div class="person-contrib">『Just Six Numbers』(2000) — 미세조정 논의의 표준 출발점.</div></div>
+<div class="person-card"><div class="person-name">루크 반스</div><div class="person-role">천체물리학자</div><div class="person-contrib">『A Fortunate Universe』(2016) 공저 — 유신론자 관점에서 미세조정을 정교하게 정리.</div></div>
+<div class="person-card"><div class="person-name">이언 바버</div><div class="person-role">물리학자·신학자</div><div class="person-contrib">과학-종교 관계의 4유형론(갈등/독립/대화/통합)을 제시.</div></div>
+<div class="person-card"><div class="person-name">존 폴킹혼</div><div class="person-role">입자물리학자·성공회 사제</div><div class="person-contrib">과학자에서 사제로 — 대화 전통의 상징적 인물.</div></div>
+<div class="person-card"><div class="person-name">데보라 하스마</div><div class="person-role">천문학자·BioLogos 대표</div><div class="person-contrib">은하 연구자이자 과학-신앙 대화 단체를 이끄는 실천적 목소리.</div></div>
+</div>
+</section>
+
+<!-- S13 -->
+<section id="s13">
+<div class="section-title">S13 · 용어 사전</div>
+<div class="gloss-grid">
+<div class="gloss-item"><div class="gloss-term">빅뱅 / 특이점</div><div class="gloss-def">우주가 뜨겁고 밀도 높은 상태에서 팽창을 시작한 사건과, 그 이론상 시작점.</div></div>
+<div class="gloss-item"><div class="gloss-term">허블-르메트르 법칙</div><div class="gloss-def">은하의 후퇴 속도가 거리에 비례한다는 관측 법칙(2018년 IAU가 이름을 공동 명명으로 개정).</div></div>
+<div class="gloss-item"><div class="gloss-term">적색편이</div><div class="gloss-def">광원이 멀어질 때 빛의 파장이 길어지는(붉은 쪽으로 이동하는) 현상.</div></div>
+<div class="gloss-item"><div class="gloss-term">우주배경복사(CMB)</div><div class="gloss-def">우주 초기의 뜨거운 상태가 식으며 남긴, 우주 전역에 균일하게 퍼진 마이크로파 복사.</div></div>
+<div class="gloss-item"><div class="gloss-term">빅뱅 핵합성</div><div class="gloss-def">우주 탄생 직후 몇 분간 일어난 가벼운 원소(수소·헬륨 등) 형성 과정.</div></div>
+<div class="gloss-item"><div class="gloss-term">급팽창(인플레이션)</div><div class="gloss-def">우주 탄생 극초기에 있었다고 여겨지는, 극도로 짧고 급격한 팽창 시기.</div></div>
+<div class="gloss-item"><div class="gloss-term">ΛCDM·암흑에너지·암흑물질</div><div class="gloss-def">현재 표준 우주론 모형과 그 구성 요소 — 우주상수(Λ)로 표현되는 암흑에너지와 냉암흑물질(CDM).</div></div>
+<div class="gloss-item"><div class="gloss-term">우주상수 문제</div><div class="gloss-def">이론적으로 예측되는 진공 에너지 값과 관측값 사이의 극단적 불일치.</div></div>
+<div class="gloss-item"><div class="gloss-term">미세조정</div><div class="gloss-def">우주의 물리 상수들이 생명이 가능한 좁은 범위에 정확히 놓여 있는 것으로 보이는 현상.</div></div>
+<div class="gloss-item"><div class="gloss-term">인류 원리</div><div class="gloss-def">관측자의 존재가 우주의 관측된 성질에 제약을 가한다는 원리(약한 버전과 강한 버전 구별).</div></div>
+<div class="gloss-item"><div class="gloss-term">다중우주</div><div class="gloss-def">우리 우주 밖에 다른 우주(들)가 존재한다는 가설군(테그마크 4단계 분류).</div></div>
+<div class="gloss-item"><div class="gloss-term">칼람 논증</div><div class="gloss-def">"존재하기 시작한 모든 것에는 원인이 있다 → 우주는 존재하기 시작했다 → 따라서 우주에는 원인이 있다"는 구조의 우주론적 논증.</div></div>
+<div class="gloss-item"><div class="gloss-term">creatio ex nihilo</div><div class="gloss-def">'무로부터의 창조' — 이미 있는 재료가 아니라 아무것도 없는 상태에서 하나님이 창조하셨다는 교리.</div></div>
+<div class="gloss-item"><div class="gloss-term">일치주의(concordism)</div><div class="gloss-def">성경 본문을 당대 최신 과학과 직접 조화시키려는 해석 경향.</div></div>
+<div class="gloss-item"><div class="gloss-term">라키아(<span class="heb">רָקִיעַ</span>)</div><div class="gloss-def">창세기 1장의 '궁창' — 고대 근동의 3층 우주 표상에서 하늘의 반구형 천장.</div></div>
+<div class="gloss-item"><div class="gloss-term">허블 텐션</div><div class="gloss-def">국소 우주 측정과 CMB 기반 추정 사이의 허블 상수 불일치 — 2026년 현재 미해결.</div></div>
+</div>
+</section>
+
+<!-- S14 -->
+<section id="s14">
+<div class="section-title">S14 · 토론 논제</div>
+<div class="discuss-card"><div class="discuss-num">논제 1</div><div class="discuss-q">빅뱅 우주론은 창조 교리의 '증거'인가 '공명'인가 — 1951년 비오 12세와 르메트르의 입장 차를 재연하고 판정하라.</div><div class="discuss-hint">아퀴나스의 존재론적 의존 개념(S5)을 활용해 답을 구성해보라.</div></div>
+<div class="discuss-card"><div class="discuss-num">논제 2</div><div class="discuss-q">아퀴나스의 구별(시간적 시작 vs 존재론적 의존)을 받아들이면 칼람 논증의 신학적 중요성은 줄어드는가?</div><div class="discuss-hint">칼람 논증이 방어하는 것은 정확히 무엇이었는지 S6의 '평가' 상자를 다시 읽어보라.</div></div>
+<div class="discuss-card"><div class="discuss-num">논제 3</div><div class="discuss-q">미세조정 논증에서 다중우주 응답은 설계 가설보다 더 사변적인가, 덜 사변적인가 — 검증 가능성과 단순성 기준으로 평가하라.</div><div class="discuss-hint">테그마크의 4단계 분류 중 어떤 단계를 기준으로 논의하는지에 따라 답이 달라질 수 있다.</div></div>
+<div class="discuss-card"><div class="discuss-num">논제 4</div><div class="discuss-q">일치주의는 왜 반복적으로 실패해왔는가 — 그럼에도 '성경과 과학의 조화' 시도가 완전히 포기될 수 없다면 어떤 형태여야 하는가(라키아 사례로 논증하라).</div><div class="discuss-hint">S4의 신자 스펙트럼 세 입장이 각각 이 질문에 어떻게 답할지 비교해보라.</div></div>
+<div class="discuss-card"><div class="discuss-num">논제 5</div><div class="discuss-q">"하나님은 누가 만들었는가"라는 질문은 유신론에 대한 반박인가, 범주 오류인가 — 필연적 존재 개념을 중심으로 논하라.</div><div class="discuss-hint">칼람 논증의 전제 1("존재하기 시작한 모든 것")이 정확히 무엇에 적용되는지 확인하라.</div></div>
+<div class="discuss-card"><div class="discuss-num">논제 6</div><div class="discuss-q">DESI·JWST발 표준모형 균열 보도를 신앙인은 어떻게 소비해야 하는가 — '전선의 과학'을 변증에 동원하는 것의 위험을 EC·CO의 사례로 논하라.</div><div class="discuss-hint">일치주의가 반복적으로 실패해온 이유(S4)와 이 질문이 어떻게 연결되는지 생각해보라.</div></div>
+</section>
+
+<!-- S_REF -->
+<section id="s_ref">
+<div class="section-title">📎 학술 레퍼런스</div>
+<div class="section-subtitle">이 자료에서 참고한 주요 문헌</div>
+
+<div class="ref-group">
+<div class="ref-group-title">① 우주론 역사·대중 과학</div>
+<div class="ref-item"><span class="ref-num">1.</span>Kragh, Helge. <em>Cosmology and Controversy</em>. Princeton University Press, 1996. [정상우주론 vs 빅뱅 논쟁사의 표준적 학술서]</div>
+<div class="ref-item"><span class="ref-num">2.</span>Hawking, Stephen. <em>A Brief History of Time</em>. Bantam, 1988. (한국어판 『시간의 역사』, 까치)</div>
+<div class="ref-item"><span class="ref-num">3.</span>Rees, Martin. <em>Just Six Numbers: The Deep Forces That Shape the Universe</em>. Basic Books, 2000. [확인된 한국어 번역판 없음 — 원서 인용]</div>
+<div class="ref-item"><span class="ref-num">4.</span>Lewis, Geraint F. &amp; Luke A. Barnes. <em>A Fortunate Universe: Life in a Finely Tuned Cosmos</em>. Cambridge University Press, 2016.</div>
+<div class="ref-item"><span class="ref-num">5.</span>Numbers, Ronald L. (ed.). <em>Galileo Goes to Jail and Other Myths about Science and Religion</em>. Harvard University Press, 2009. [확인된 한국어 번역판 없음 — 원서 인용]</div>
+</div>
+
+<div class="ref-group">
+<div class="ref-group-title">② 철학·변증</div>
+<div class="ref-item"><span class="ref-num">6.</span>Craig, William Lane. <em>The Kalam Cosmological Argument</em>. Macmillan, 1979.</div>
+<div class="ref-item"><span class="ref-num">7.</span>Craig, William Lane &amp; Quentin Smith. <em>Theism, Atheism, and Big Bang Cosmology</em>. Oxford University Press, 1993. [찬반 양측이 직접 논쟁한 공정성 자료]</div>
+<div class="ref-item"><span class="ref-num">8.</span>Craig, William Lane &amp; J.P. Sinclair. "The Kalam Cosmological Argument." In <em>The Blackwell Companion to Natural Theology</em>. Wiley-Blackwell, 2009.</div>
+<div class="ref-item"><span class="ref-num">9.</span>Collins, Robin. "The Teleological Argument." In <em>The Blackwell Companion to Natural Theology</em>. Wiley-Blackwell, 2009.</div>
+<div class="ref-item"><span class="ref-num">10.</span>Krauss, Lawrence. <em>A Universe from Nothing</em>. Free Press, 2012. [반대 관점 — 한국어판 『무로부터의 우주』, 승산]</div>
+</div>
+
+<div class="ref-group">
+<div class="ref-group-title">③ 신학·과학과 신앙</div>
+<div class="ref-item"><span class="ref-num">11.</span>Barbour, Ian. <em>Religion and Science: Historical and Contemporary Issues</em>. HarperOne, 1997.</div>
+<div class="ref-item"><span class="ref-num">12.</span>Polkinghorne, John. <em>The Faith of a Physicist</em>. Princeton University Press, 1994; <em>The God of Hope and the End of the World</em>. Yale University Press, 2002.</div>
+<div class="ref-item"><span class="ref-num">13.</span>McGrath, Alister. <em>A Fine-Tuned Universe</em>. Westminster John Knox Press, 2009. [2009년 기포드 강연]</div>
+<div class="ref-item"><span class="ref-num">14.</span>Russell, Robert John. <em>Cosmology from Alpha to Omega</em>. Fortress Press, 2008.</div>
+<div class="ref-item"><span class="ref-num">15.</span>Haarsma, Deborah B. &amp; Loren D. Haarsma. <em>Origins: Christian Perspectives on Creation, Evolution, and Intelligent Design</em>. Faith Alive, 2011.</div>
+</div>
+
+<div class="ref-group">
+<div class="ref-group-title">④ 성경·고대 우주관 (ANE 크로스링크)</div>
+<div class="ref-item"><span class="ref-num">16.</span>Walton, John H. <em>The Lost World of Genesis One: Ancient Cosmology and the Origins Debate</em>. IVP Academic, 2009. (한국어판 『창세기 1장과 고대 근동 우주론』, 강성열 옮김, 새물결플러스, 2017)</div>
+<div class="ref-item"><span class="ref-num">17.</span>Seely, Paul H. "The Firmament and the Water Above." <em>Westminster Theological Journal</em> 53 (1991): 227–240; 54 (1992): 31–46.</div>
+<div class="ref-item"><span class="ref-num">18.</span>Lemaître, Georges. "Un Univers homogène de masse constante et de rayon croissant rendant compte de la vitesse radiale des nébuleuses extra-galactiques." <em>Annales de la Société Scientifique de Bruxelles</em> A47 (1927): 49–59. [역사적 원전 — 각주용]</div>
+</div>
+
+<div class="ref-group">
+<div class="ref-group-title">⑤ 온라인·최신 (2026년 상반기 기준 재검증됨)</div>
+<div class="ref-item"><span class="ref-num">19.</span>DESI Collaboration. DR2 결과 및 논문 모음 — data.desi.lbl.gov/doc/papers (DR1: 2024, DR2: 2025년 3월 공개, '진화하는 암흑에너지' 힌트 지속 논의 중).</div>
+<div class="ref-item"><span class="ref-num">20.</span>NASA/ESA/CSA James Webb Space Telescope 공식 보도자료 — science.nasa.gov (초기 은하 관측 및 후속 분석).</div>
+<div class="ref-item"><span class="ref-num">21.</span>BioLogos(biologos.org) — 우주론 관련 해설 아티클.</div>
+</div>
+
+<div class="ref-warning">
+<strong>⚠️ 레퍼런스 사용 안내:</strong> S9의 최신 동향(허블 텐션, DESI 암흑에너지 논쟁)은 이 자료 제작 시점(2026년 상반기) 기준으로 진행 중인 연구이며, 결론이 아니라 논쟁의 방향을 서술한 것입니다. 최신 데이터 공개 시 내용이 갱신될 수 있습니다. 한국어판 표기가 없는 서적은 확인 시점에 번역판을 찾지 못한 것으로, 이후 번역이 나왔을 가능성을 배제하지 않습니다.
+</div>
+</section>
+
+<!-- QUIZ -->
+<section id="s_quiz">
+<div class="section-title">❓ 심화 퀴즈</div>
+<div class="section-subtitle">12문제로 이해도를 점검합니다.</div>
+
+<div id="quiz-section-high">
+
+<div class="quiz-card"><div class="q-num">문제 1</div><div class="q-text">아인슈타인이 1917년 자신의 방정식에 우주상수를 도입한 이유는 무엇인가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(1,'a','b')">① 팽창을 가속하기 위해</button>
+<button class="q-opt" onclick="checkQH(1,'b','b')">② 정적 우주를 유지하기 위해</button>
+<button class="q-opt" onclick="checkQH(1,'c','b')">③ 블랙홀 형성을 설명하기 위해</button>
+<button class="q-opt" onclick="checkQH(1,'d','b')">④ 암흑물질을 대체하기 위해</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 2</div><div class="q-text">르메트르가 1927년에 한 기여로 옳은 것은?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(2,'a','c')">① 우주배경복사를 최초 관측했다</button>
+<button class="q-opt" onclick="checkQH(2,'b','c')">② 미세조정 개념을 처음 제시했다</button>
+<button class="q-opt" onclick="checkQH(2,'c','c')">③ 허블보다 먼저 팽창 우주 해를 도출하고 관측 자료와 연결했다</button>
+<button class="q-opt" onclick="checkQH(2,'d','c')">④ 칼람 논증을 현대적으로 부활시켰다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 3</div><div class="q-text">'빅뱅'이라는 명칭은 1949년 누구에 의해, 어떤 맥락에서 생겨났는가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(3,'a','a')">① 정상우주론자 프레드 호일이 라디오에서 비꼬며 부른 별명이 굳어졌다</button>
+<button class="q-opt" onclick="checkQH(3,'b','a')">② 르메트르가 자신의 이론에 붙인 공식 명칭이다</button>
+<button class="q-opt" onclick="checkQH(3,'c','a')">③ NASA가 공모전을 통해 정한 이름이다</button>
+<button class="q-opt" onclick="checkQH(3,'d','a')">④ 아인슈타인이 처음 사용한 표현이다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 4</div><div class="q-text">1965년 발견된 우주배경복사(CMB)가 특히 강력한 증거로 평가받는 이유는?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(4,'a','d')">① 관측하기가 매우 쉬웠기 때문에</button>
+<button class="q-opt" onclick="checkQH(4,'b','d')">② 정상우주론자들이 먼저 발견했기 때문에</button>
+<button class="q-opt" onclick="checkQH(4,'c','d')">③ 미세조정 논증을 뒷받침하기 때문에</button>
+<button class="q-opt" onclick="checkQH(4,'d','d')">④ 이론적 예측이 먼저 있었고 그 예측이 실제로 확인되었기 때문에</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 5</div><div class="q-text">1951년 비오 12세와 르메트르 사이에 있었던 일의 핵심은 무엇인가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(5,'a','b')">① 교황이 빅뱅 이론을 이단으로 정죄했다</button>
+<button class="q-opt" onclick="checkQH(5,'b','b')">② 르메트르가 빅뱅과 창조 교리를 성급히 동일시하지 말라고 만류했다</button>
+<button class="q-opt" onclick="checkQH(5,'c','b')">③ 르메트르가 사제직을 사임했다</button>
+<button class="q-opt" onclick="checkQH(5,'d','b')">④ 교황청이 빅뱅 이론에 재정을 지원하기로 했다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 6</div><div class="q-text">아퀴나스가 『신학대전』에서 제시한 창조 개념의 핵심 구별은 무엇인가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(6,'a','c')">① 물질 창조와 영혼 창조의 구별</button>
+<button class="q-opt" onclick="checkQH(6,'b','c')">② 6일 창조와 즉각 창조의 구별</button>
+<button class="q-opt" onclick="checkQH(6,'c','c')">③ 시간적 시작과 존재론적 의존의 구별</button>
+<button class="q-opt" onclick="checkQH(6,'d','c')">④ 자연과 초자연의 구별</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 7</div><div class="q-text">칼람 우주론 논증의 3단계 구조에서 두 번째 전제는 무엇인가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(7,'a','b')">① 존재하기 시작한 모든 것에는 원인이 있다</button>
+<button class="q-opt" onclick="checkQH(7,'b','b')">② 우주는 존재하기 시작했다</button>
+<button class="q-opt" onclick="checkQH(7,'c','b')">③ 우주의 원인은 인격적이다</button>
+<button class="q-opt" onclick="checkQH(7,'d','b')">④ 미세조정은 설계를 함의한다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 8</div><div class="q-text">프레드 호일이 탄소 공명과 관련하여 보인 태도로 옳은 것은?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(8,'a','d')">① 처음부터 설계 논증을 지지했다</button>
+<button class="q-opt" onclick="checkQH(8,'b','d')">② 탄소 공명의 존재를 부정했다</button>
+<button class="q-opt" onclick="checkQH(8,'c','d')">③ 이 발견과 무관한 인물이다</button>
+<button class="q-opt" onclick="checkQH(8,'d','d')">④ 탄소의 필요성으로부터 특정 핵공명을 예측했고, 실제 발견에 깊이 동요했다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 9</div><div class="q-text">약한 인류 원리와 강한 인류 원리의 차이는 무엇인가?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(9,'a','a')">① 약한 원리는 관측 선택 효과를 진술할 뿐이고, 강한 원리는 우주가 관측자를 낳도록 되어 있어야 한다는 더 강한 형이상학적 주장을 편다</button>
+<button class="q-opt" onclick="checkQH(9,'b','a')">② 둘은 동일한 주장의 다른 표현일 뿐이다</button>
+<button class="q-opt" onclick="checkQH(9,'c','a')">③ 약한 원리가 더 강한 증거력을 가진다</button>
+<button class="q-opt" onclick="checkQH(9,'d','a')">④ 강한 원리만 과학계에서 받아들여진다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 10</div><div class="q-text">일치주의(concordism)에 대한 이 자료의 평가로 가장 적절한 것은?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(10,'a','b')">① 성경 해석의 가장 안전한 방법이다</button>
+<button class="q-opt" onclick="checkQH(10,'b','b')">② 당대 과학에 성경을 맞추려는 시도가 반복적으로 실패해온 역사가 있어 경계가 필요하다</button>
+<button class="q-opt" onclick="checkQH(10,'c','b')">③ 현대 과학과는 무관한 옛 방법론이라 더 이상 문제되지 않는다</button>
+<button class="q-opt" onclick="checkQH(10,'d','b')">④ 월튼의 기능적 창조론과 동일한 입장이다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 11</div><div class="q-text">2026년 현재 허블 텐션의 상태를 가장 정확히 서술한 것은?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(11,'a','c')">① 완전히 해소되어 두 측정값이 일치한다</button>
+<button class="q-opt" onclick="checkQH(11,'b','c')">② 애초에 존재한 적이 없는 오보였다</button>
+<button class="q-opt" onclick="checkQH(11,'c','c')">③ 여전히 미해결이며 새 측정들이 오히려 불일치를 재확인·심화시키고 있다</button>
+<button class="q-opt" onclick="checkQH(11,'d','c')">④ 표준모형(ΛCDM)이 완전히 폐기되었다는 합의가 이루어졌다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 12</div><div class="q-text">이 자료가 반복적으로 강조하는 '확정된 과학'과 '전선(前線)의 과학'을 구별하는 이유는?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQH(12,'a','d')">① 전선의 과학은 신뢰할 수 없으므로 무시해야 하기 때문에</button>
+<button class="q-opt" onclick="checkQH(12,'b','d')">② 확정된 과학만 성경과 관련이 있기 때문에</button>
+<button class="q-opt" onclick="checkQH(12,'c','d')">③ 두 종류를 구별할 필요가 실제로는 없기 때문에</button>
+<button class="q-opt" onclick="checkQH(12,'d','d')">④ 아직 논쟁 중인 것을 확정된 사실처럼 변증에 동원하면 지적 정직성을 해치기 때문에</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+</div>
+
+<div id="score-section-high" class="score-box">
+<div class="score-num" id="score-num-high">0</div>
+<div>12문제 중 정답 개수</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+  <p>Made by Isaac with Claude | 태초에 — 우주론과 신앙 교육자료 — 대학생 버전</p>
+  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a></p>
+</footer>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function switchTab(section, panelId, btn) {
+  const sec = document.getElementById(section);
+  sec.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  sec.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const arrow = btn.querySelector('.acc-arrow');
+  const isOpen = body.classList.contains('open');
+  if (isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      body.classList.remove('open');
+      body.style.maxHeight = '0';
+    });
+  } else {
+    body.classList.add('open');
+    const _t = body.style.transition;
+    body.style.transition = 'none';
+    body.style.maxHeight = 'none';
+    const target = body.scrollHeight;
+    body.style.maxHeight = '0';
+    void body.offsetHeight;
+    body.style.transition = _t;
+    body.style.maxHeight = target + 'px';
+    body.addEventListener('transitionend', function te(e) {
+      if (e.propertyName !== 'max-height') return;
+      if (body.classList.contains('open')) body.style.maxHeight = 'none';
+      body.removeEventListener('transitionend', te);
+    });
+  }
+  if (arrow) arrow.textContent = isOpen ? '▼' : '▲';
+}
+
+const answeredH = {};
+let scoreH = 0;
+const TOTAL_QH = 12;
+
+function checkQH(qNum, chosen, correctAns) {
+  if (answeredH[qNum]) return;
+  answeredH[qNum] = chosen;
+  if (chosen === correctAns) scoreH++;
+  const letters = ['a','b','c','d'];
+  const card = document.querySelectorAll('#quiz-section-high .quiz-card')[qNum - 1];
+  const opts = card.querySelectorAll('.q-opt');
+  opts.forEach((opt, i) => {
+    opt.disabled = true;
+    if (letters[i] === correctAns) opt.classList.add('correct');
+    else if (letters[i] === chosen) opt.classList.add('wrong');
+  });
+  const fb = card.querySelector('.q-feedback');
+  fb.textContent = feedbacksH[qNum][chosen] || '';
+  fb.style.display = 'block';
+  if (Object.keys(answeredH).length === TOTAL_QH) {
+    document.getElementById('score-num-high').textContent = scoreH;
+    document.getElementById('score-section-high').style.display = 'block';
+  }
+}
+
+const feedbacksH = {
+  1: {a:'가속이 아니라 정적 상태를 유지하려는 목적이었습니다.', b:'맞습니다! 당시 전제였던 정적 우주를 지키기 위해 인위적으로 도입한 항입니다. 아인슈타인은 훗날 이를 후회했습니다.', c:'블랙홀 설명과는 무관합니다.', d:'암흑물질 개념은 훨씬 후대에 등장합니다.'},
+  2: {a:'CMB는 1965년 펜지어스와 윌슨이 발견했습니다.', b:'미세조정 개념은 후대 논의입니다.', c:'맞습니다! 르메트르는 1927년 허블보다 먼저 팽창 우주 해를 도출하고 관측 자료와 연결했습니다.', d:'칼람 논증 부활은 크레이그(1979)의 기여입니다.'},
+  3: {a:'맞습니다! 정상우주론을 지지하던 호일이 비꼬는 의도로 부른 별명이 그대로 이름이 되었습니다.', b:'르메트르는 이 이론에 별도의 이름을 붙이지 않았습니다.', c:'공모전으로 정해진 이름이 아닙니다.', d:'아인슈타인이 만든 표현이 아닙니다.'},
+  4: {a:'관측 자체는 우연히 발견되었을 뿐 쉬웠던 것은 아닙니다.', b:'정상우주론자들이 아니라 빅뱅 이론가들의 예측이었습니다.', c:'CMB는 미세조정과 직접 관련이 없습니다.', d:'맞습니다! 예측 후 발견은 과학철학적으로 매우 강력한 증거 형태입니다.'},
+  5: {a:'정죄가 아니라 조심스러운 만류였습니다.', b:'맞습니다! 르메트르는 과학 이론을 신앙의 근거로 성급히 묶지 말라고 조언했습니다.', c:'르메트르는 사제직을 유지했습니다.', d:'재정 지원과는 무관한 사건입니다.'},
+  6: {a:'물질과 영혼의 구별이 아닙니다.', b:'6일 창조 논쟁과는 다른 층위의 구별입니다.', c:'맞습니다! 창조는 시간적 시작이 아니라 존재론적 의존의 문제라는 것이 아퀴나스의 핵심 구별입니다.', d:'자연-초자연 구별과는 다른 논점입니다.'},
+  7: {a:'그것은 첫 번째 전제입니다.', b:'맞습니다! 두 번째 전제는 "우주는 존재하기 시작했다"입니다.', c:'그것은 논증의 결론 이후에 별도로 논의되는 주제입니다.', d:'그것은 미세조정 논증에 속합니다.'},
+  8: {a:'호일은 오히려 빅뱅과 설계 논증 모두에 비판적이었습니다.', b:'호일은 탄소 공명을 예측하고 이후 확인했습니다.', c:'호일은 이 발견의 핵심 인물입니다.', d:'맞습니다! 호일은 탄소의 존재로부터 특정 핵공명을 예측했고, 실제 발견에 깊이 동요했습니다.'},
+  9: {a:'맞습니다! 약한 원리는 선택 효과 진술에 가깝고, 강한 원리는 더 강한 형이상학적 주장을 담습니다.', b:'두 원리는 주장의 강도가 다릅니다.', c:'강한 원리가 아니라 약한 원리가 더 논쟁의 여지가 적습니다.', d:'둘 다 논의되지만 지지 정도는 다릅니다.'},
+  10: {a:'가장 안전하다기보다 반복적으로 실패해온 역사가 있습니다.', b:'맞습니다! 당대 과학이 바뀔 때마다 성경 해석이 그 과학의 인질이 되어온 역사를 경계해야 합니다.', c:'오늘날에도 여전히 반복되는 유혹입니다.', d:'월튼의 기능적 창조론은 일치주의와 다른, 비일치주의적 접근입니다.'},
+  11: {a:'2026년 현재 완전히 해소되지 않았습니다.', b:'허블 텐션은 실제 측정 불일치입니다.', c:'맞습니다! 새로운 정밀 측정들도 불일치를 재확인·심화시키는 경향을 보이고 있습니다.', d:'ΛCDM 폐기에 대한 합의는 없습니다.'},
+  12: {a:'무시가 아니라 정직하게 "논쟁 중"으로 표기하는 것이 목표입니다.', b:'전선의 과학도 교육적으로 중요하게 다뤄야 할 대상입니다.', c:'두 구별은 실제로 중요합니다.', d:'맞습니다! 논쟁 중인 것을 확정된 사실처럼 다루면 지적 정직성이 훼손되고, 나중에 과학이 수정될 때 신앙이 불필요하게 흔들릴 수 있습니다.'}
+};
+</script>
+</body>
+</html>

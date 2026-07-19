@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>태초에 — 우주론과 신앙 — 청소년 버전</title>
+<style>
+  :root {
+    --co: #453a80;
+    --co-dark: #251d4d;
+    --co-light: #8d84c0;
+    --co-xlight: #e9e6f7;
+    --gold: #f4a261;
+    --gold-light: #fde9d4;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+         background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  .site-header { background: linear-gradient(135deg, #251d4d 0%, #453a80 100%);
+    color: #fff; padding: 48px 24px 36px; text-align: center; }
+  .site-header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+  .site-header p { opacity: .85; font-size: .98rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+  .level-badge { display: inline-block; background: rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.35); border-radius: 20px;
+    padding: 4px 16px; font-size: .8rem; margin-top: 12px; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: #fff;
+        border-bottom: 2px solid var(--co-xlight); padding: 0 16px;
+        overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-inner { width: fit-content; max-width: 100%; margin: 0 auto; display: flex; gap: 0;
+               overflow-x: auto; scrollbar-width: none; }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-inner::after { content: ''; flex: 0 0 16px; }
+  nav a { display: inline-block; padding: 13px 14px; font-size: .83rem; font-weight: 600;
+          color: var(--muted); text-decoration: none; white-space: nowrap;
+          border-bottom: 3px solid transparent; transition: all .2s; }
+  nav a.active, nav a:hover { color: var(--co); border-bottom-color: var(--co); }
+
+  .section { max-width: 860px; margin: 0 auto; padding: 48px 20px; }
+  .section + .section { border-top: 1px solid var(--border); }
+  .section-title { font-size: 1.35rem; font-weight: 800; color: var(--co);
+    margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: .9rem; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+  .card { background: var(--card); border-radius: var(--radius);
+          box-shadow: var(--shadow); padding: 28px; margin-bottom: 16px; }
+  .highlight-box { background: var(--co-xlight); border-left: 4px solid var(--co);
+    border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; margin: 16px 0; font-size: .93rem; }
+  .warn-box { background: #fff3cd; border-left: 4px solid #ffc107;
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: .9rem; }
+  .info-box { background: #e8f4fd; border-left: 4px solid #4895ef;
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: .9rem; }
+  .gold-box { background: var(--gold-light); border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 12px 0; font-size: .9rem; }
+
+  .num-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 12px; margin: 16px 0; }
+  .num-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 18px; text-align: center; border-top: 3px solid var(--co-light); }
+  .num-card .num { font-size: 1.5rem; font-weight: 800; color: var(--co); }
+  .num-card .num-label { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+
+  .tab-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+             overflow-x: auto; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { background: var(--bg); border: 1px solid var(--border);
+             border-radius: 20px; padding: 8px 16px; font-size: .85rem;
+             font-weight: 600; cursor: pointer; color: var(--muted); transition: .2s; white-space: nowrap; }
+  .tab-btn.active { background: var(--co); color: #fff; border-color: var(--co); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .acc-item { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 8px; }
+  .acc-btn { width: 100%; text-align: left; padding: 16px 18px; background: var(--card);
+             font-size: .95rem; font-weight: 700; border: none; cursor: pointer;
+             display: flex; justify-content: space-between; align-items: center; }
+  .acc-btn:hover { background: #f8f9fa; }
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; padding: 0 18px; }
+  .acc-body.open { padding: 16px 18px; }
+  .arrow { font-size: .75rem; color: var(--muted); transition: transform .25s; }
+
+  .flip-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 14px; margin-bottom: 20px; }
+  .flip-card { height: 195px; cursor: pointer; perspective: 1000px; }
+  .flip-inner { width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; position: relative; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    border-radius: var(--radius); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 16px; text-align: center; }
+  .flip-front { background: var(--card); border: 2px solid var(--co-xlight); }
+  .flip-back { background: var(--co); color: #fff; transform: rotateY(180deg); }
+  .flip-icon { font-size: 2rem; margin-bottom: 8px; }
+  .flip-title { font-size: .95rem; font-weight: 700; }
+  .flip-hint { font-size: .72rem; color: var(--muted); margin-top: 6px; }
+  .flip-back-title { font-size: .95rem; font-weight: 800; margin-bottom: 8px; }
+  .flip-back-text { font-size: .81rem; line-height: 1.6; opacity: .95; }
+
+  .person-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 16px; }
+  .person-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px; }
+  .person-emoji { font-size: 2.2rem; margin-bottom: 8px; }
+  .person-name { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
+  .person-role { font-size: .78rem; color: var(--co); font-weight: 600; margin-bottom: 8px; }
+  .person-work { font-size: .8rem; color: var(--muted); font-style: italic; margin-bottom: 8px; }
+  .person-desc { font-size: .85rem; color: #444; line-height: 1.6; }
+
+  .quiz-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+               padding: 24px; margin-bottom: 16px; }
+  .q-num { font-size: .75rem; font-weight: 700; color: var(--co); text-transform: uppercase; margin-bottom: 6px; }
+  .q-text { font-size: 1rem; font-weight: 700; margin-bottom: 14px; line-height: 1.5; }
+  .q-options { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt { text-align: left; padding: 12px 16px; border-radius: 8px; border: 1.5px solid var(--border);
+           background: #fff; font-size: .9rem; cursor: pointer; transition: .18s; }
+  .q-opt:hover:not(:disabled) { border-color: var(--co); background: var(--co-xlight); }
+  .q-opt.correct { border-color: #2d6a4f; background: #d8f3dc; color: #2d6a4f; font-weight: 700; }
+  .q-opt.wrong { border-color: #e63946; background: #ffe0e3; color: #c1121f; }
+  .q-feedback { margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+                background: var(--co-xlight); font-size: .88rem; border-left: 3px solid var(--co); }
+  .score-box { background: var(--co); color: #fff; border-radius: var(--radius);
+               padding: 28px; text-align: center; margin-top: 24px; display: none; }
+  .score-num { font-size: 2.8rem; font-weight: 800; margin-bottom: 4px; }
+
+  footer { background: var(--co-dark); color: rgba(255,255,255,.75);
+           text-align: center; padding: 20px; font-size: .82rem; }
+  footer a { color: rgba(255,255,255,.9); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .site-header h1 { font-size: 1.6rem; }
+    .section { padding: 32px 16px; }
+    .flip-grid { grid-template-columns: 1fr 1fr; }
+    .person-grid { grid-template-columns: 1fr; }
+    .num-cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+  <a href="https://isaac-math.github.io/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
+  <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
+  <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;
+     display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);
+     border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:4px 12px;">🏠 홈으로</a>
+  <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
+  <span style="color:rgba(255,255,255,.7);font-size:.82rem;">태초에 — 우주론과 신앙 — 청소년 버전</span>
+</div>
+
+<div class="site-header">
+  <h1>🌌 태초에 — 우주론과 신앙</h1>
+  <p>우주에도 시작이 있었대요. 그 '태초'는 창세기의 태초와 같은 것일까요? 풍선과 다이얼 비유로 쉽게 알아봐요.</p>
+  <span class="level-badge">청소년 버전</span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#s0" class="active" onclick="setActive(this)">🌌 밤하늘</a>
+    <a href="#s1" onclick="setActive(this)">🎈 우주의 시작</a>
+    <a href="#s2" onclick="setActive(this)">⛪ 르메트르</a>
+    <a href="#s3" onclick="setActive(this)">📖 성경과 과학</a>
+    <a href="#s4" onclick="setActive(this)">🎚️ 골디락스</a>
+    <a href="#s5" onclick="setActive(this)">🤔 누가 만들었나</a>
+    <a href="#s6" onclick="setActive(this)">✨ 새로운 시작</a>
+    <a href="#s7" onclick="setActive(this)">🙏 예배</a>
+    <a href="#s8" onclick="setActive(this)">🌟 인물</a>
+    <a href="#squiz" onclick="setActive(this)">❓ 퀴즈</a>
+  </div>
+</nav>
+
+<!-- S0 -->
+<section id="s0" class="section">
+<div class="section-title">🌌 밤하늘의 질문</div>
+<p class="section-sub">밤하늘을 올려다본 적 있나요? 그 크기를 함께 느껴봐요.</p>
+
+<div class="num-cards">
+  <div class="num-card"><div class="num">1.3초</div><div class="num-label">빛의 속도로 달까지</div></div>
+  <div class="num-card"><div class="num">4.2년</div><div class="num-label">가장 가까운 별까지</div></div>
+  <div class="num-card"><div class="num">10만 년</div><div class="num-label">우리 은하를 가로지르는 시간</div></div>
+</div>
+
+<p>빛은 1초에 지구를 일곱 바퀴 반 돕니다. 그런데 그 빠른 빛으로도 달까지 1.3초, 가장 가까운 별까지는 4년 넘게 걸립니다. 우리 은하 하나를 가로지르는 데만 10만 년이 걸리고요. 그리고 우주에는 이런 은하가 수천억 개 더 있습니다.</p>
+
+<div class="card">
+<p style="font-style:italic;">"주의 손가락으로 만드신 주의 하늘과 주께서 베풀어 두신 달과 별들을 내가 보오니 사람이 무엇이기에 주께서 그를 생각하시며 인자가 무엇이기에 주께서 그를 돌보시나이까"</p>
+<p style="font-size:.82rem;color:var(--muted);margin-top:8px;">— 시편 8:3-4, 개역개정</p>
+</div>
+
+<p>이 시를 쓴 다윗도 우리처럼 밤하늘 앞에서 작아지는 느낌을 받았습니다. 그런데 그 느낌 다음에 나온 말은 "나는 아무것도 아니다"가 아니라 "그런데도 하나님이 나를 생각하신다"였습니다. 이 시리즈는 이 두 가지 — 우주의 압도적인 크기와, 그럼에도 있는 관심 — 를 함께 붙잡고 갑니다.</p>
+</section>
+
+<!-- S1 -->
+<section id="s1" class="section">
+<div class="section-title">🎈 우주에 시작이 있었다!</div>
+<p class="section-sub">우주도 태어난 날이 있다는 걸, 과학자들은 어떻게 알았을까요?</p>
+
+<div class="card">
+<p><strong>풍선 비유</strong>: 풍선에 점을 여러 개 찍고 불어보세요. 점들이 서로 멀어지죠? 그런데 어느 점에서 봐도 "다른 점들이 나에게서 멀어진다"고 느껴집니다. 특별한 중심이 없어요. 우주도 이렇게 팽창하고 있습니다 — 모든 은하가 서로에게서 멀어지고 있어요.</p>
+</div>
+
+<p>1929년, 천문학자 에드윈 허블은 멀리 있는 은하일수록 더 빨리 우리에게서 멀어진다는 것을 관측으로 확인했습니다. 그런데 이 팽창을 시간을 거꾸로 감아보면 어떻게 될까요? 모든 것이 점점 더 가까워지다가, 아주 먼 과거의 어느 순간에는 상상할 수 없이 뜨겁고 작은 한 점에 모여 있었다는 계산이 나옵니다. 그 순간이 바로 우주의 '시작'입니다.</p>
+
+<div class="highlight-box">
+<strong>재미있는 사실</strong>: '빅뱅(Big Bang)'이라는 이름은 사실 원래 놀리는 별명이었어요! 1949년, 이 이론에 반대하던 천문학자 프레드 호일이 라디오 방송에서 "그러니까 그 '빅뱅' 말이죠"라며 비꼬듯 말한 게 그대로 이름이 되어버렸습니다. 정작 이 이론을 처음 제안한 사람은 이 별명을 좋아하지 않았다고 해요.
+</div>
+</section>
+
+<!-- S2 -->
+<section id="s2" class="section">
+<div class="section-title">⛪ 신부님 과학자, 르메트르</div>
+<p class="section-sub">사제복을 입은 물리학자가 있었습니다.</p>
+
+<div class="card">
+<p><strong>조르주 르메트르</strong>(1894-1966)는 벨기에의 가톨릭 사제이자 물리학자였습니다. 놀랍게도 그는 허블보다 2년 먼저인 1927년, 수학 계산만으로 우주가 팽창하고 있다는 것을 알아냈습니다. 처음에는 아인슈타인조차 "당신의 계산은 맞지만, 물리학적으로는 끔찍하다"며 믿지 않았어요.</p>
+</div>
+
+<p>그런데 르메트르에게서 정말 인상 깊은 건 다른 부분입니다. 1951년, 교황 비오 12세가 "빅뱅이 성경의 창조를 과학적으로 증명했다!"고 말하려던 순간, 다른 누구도 아닌 르메트르 신부님이 조용히 나서서 이를 만류했다고 전해집니다.</p>
+
+<div class="highlight-box">
+르메트르의 뜻은 이런 것이었습니다 — 과학 이론은 언제든 새로운 증거로 바뀔 수 있으니, 신앙을 하나의 과학 이론에 묶어두어서는 안 된다는 것이죠. 이후 교황은 이 주장을 다시 꺼내지 않았습니다.
+</div>
+
+<p>과학자이면서 동시에 사제였던 사람이, 오히려 "과학이 신앙을 증명했다"는 말을 가장 조심스러워했다는 것 — 이것이 이 시리즈 전체가 지키려는 태도입니다.</p>
+</section>
+
+<!-- S3 -->
+<section id="s3" class="section">
+<div class="section-title">📖 성경은 과학책일까?</div>
+<p class="section-sub">창세기와 과학은 서로 다른 질문에 답하고 있어요.</p>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('s3','s3t1',this)">두 질문 비교</button>
+  <button class="tab-btn" onclick="switchTab('s3','s3t2',this)">갈릴레오의 말</button>
+</div>
+<div id="s3t1" class="tab-panel active">
+<p>창세기 1장은 <strong>"누가, 왜"</strong> 만드셨는지를 답합니다 — 하나님이, 사랑으로, 목적을 가지고. 과학은 <strong>"어떻게, 언제"</strong> 그 일이 일어났는지를 답합니다 — 138억 년 전, 빅뱅으로부터. 두 질문은 싸우는 게 아니라 서로 다른 걸 묻고 있을 뿐입니다.</p>
+</div>
+<div id="s3t2" class="tab-panel">
+<div class="card">
+<p style="font-style:italic;">"성경은 하늘이 어떻게 도는지가 아니라, 하늘에 어떻게 가는지를 알려준다."</p>
+<p style="font-size:.82rem;color:var(--muted);margin-top:8px;">— 갈릴레오 갈릴레이가 인용한 말 (대공비 크리스티나에게 보낸 편지, 1615)</p>
+</div>
+<p>과학과 신앙 사이의 첫 큰 갈등이라 불리는 갈릴레오 사건조차, 사실은 "성경 대 과학"의 싸움이 아니라 교회 정치와 개인 갈등이 얽힌 복잡한 사건이었다는 것이 오늘날 역사학자들의 평가입니다.</p>
+</div>
+</section>
+
+<!-- S4 -->
+<section id="s4" class="section">
+<div class="section-title">🎚️ 골디락스 우주</div>
+<p class="section-sub">우주를 만드는 다이얼이 있다면? 카드를 눌러 뒤집어 보세요.</p>
+
+<div class="flip-grid">
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front"><div class="flip-icon">🌀</div><div class="flip-title">중력 다이얼</div><div class="flip-hint">탭하여 뒤집기</div></div>
+      <div class="flip-back"><div class="flip-back-title">조금만 세면?</div><p class="flip-back-text">우주가 만들어지자마자 다시 쪼그라들어 버려요. 별도, 행성도 생길 시간이 없습니다.</p></div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front"><div class="flip-icon">💨</div><div class="flip-title">중력 다이얼</div><div class="flip-hint">탭하여 뒤집기</div></div>
+      <div class="flip-back"><div class="flip-back-title">조금만 약하면?</div><p class="flip-back-text">물질이 서로 뭉치지 못해 별도 은하도 만들어지지 못합니다.</p></div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front"><div class="flip-icon">⚛️</div><div class="flip-title">핵력 다이얼</div><div class="flip-hint">탭하여 뒤집기</div></div>
+      <div class="flip-back"><div class="flip-back-title">아주 조금만 달라지면?</div><p class="flip-back-text">별 속에서 탄소가 만들어지는 반응 자체가 일어나지 않습니다. 탄소가 없으면 우리 몸도 없어요.</p></div>
+    </div>
+  </div>
+  <div class="flip-card" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front"><div class="flip-icon">🌌</div><div class="flip-title">우주 팽창 속도 다이얼</div><div class="flip-hint">탭하여 뒤집기</div></div>
+      <div class="flip-back"><div class="flip-back-title">아주 조금만 빠르면?</div><p class="flip-back-text">물질이 너무 빨리 흩어져서 별도 은하도 뭉쳐지지 못합니다.</p></div>
+    </div>
+  </div>
+</div>
+
+<p>이렇게 몇 개의 숫자만 아주 조금 달랐어도 별도, 탄소도, 우리도 존재할 수 없었을 거라는 게 과학자들의 계산입니다. 마치 누군가 우주라는 라디오의 주파수를 정확히 맞춰놓은 것처럼요. 이걸 <strong>"우연이다"</strong>라고 보는 과학자도, <strong>"설계로 보인다"</strong>라고 보는 과학자도 있습니다 — 이 논쟁은 대학생 버전에서 더 깊이 다룹니다.</p>
+</section>
+
+<!-- S5 -->
+<section id="s5" class="section">
+<div class="section-title">🤔 "그럼 하나님은 누가 만들었어?"</div>
+<p class="section-sub">아마 한 번쯤 들어봤을, 또는 스스로 물어봤을 질문이죠.</p>
+
+<div class="acc-item">
+  <button class="acc-btn" onclick="toggleAcc(this)">이 질문, 왜 자연스러운가요? <span class="arrow">▼</span></button>
+  <div class="acc-body"><p>"우주에 시작이 있다면 그걸 시작한 무언가가 있어야 한다"고 배웠는데, 그럼 "하나님도 시작이 있고, 그 하나님을 만든 또 다른 무언가가 있어야 하지 않나?"라는 생각은 아주 자연스러운 질문입니다. 놀리는 질문이 아니라 좋은 질문이에요.</p></div>
+</div>
+<div class="acc-item">
+  <button class="acc-btn" onclick="toggleAcc(this)">기독교의 답은 무엇인가요? <span class="arrow">▼</span></button>
+  <div class="acc-body"><p>"시작이 있는 것"에는 원인이 필요하다는 원리가 적용되는 건 <strong>시작이 있는 것들</strong>에만 해당합니다. 기독교가 말하는 하나님은 애초에 시작이 없는 분 — 스스로 존재하는 분입니다. "만들어진 신"이라면 그건 애초에 성경이 말하는 하나님이 아닙니다.</p></div>
+</div>
+<div class="acc-item">
+  <button class="acc-btn" onclick="toggleAcc(this)">그래도 이해가 잘 안 돼요. <span class="arrow">▼</span></button>
+  <div class="acc-body"><p>괜찮습니다. "시작이 없는 존재"는 우리의 일상 경험 밖에 있는 개념이라 상상하기 어려운 게 정상이에요. 다 이해하지 못해도 괜찮은 질문이 있습니다 — 이 시리즈 전체가 그런 정직한 겸손을 지키려고 합니다.</p></div>
+</div>
+</section>
+
+<!-- S6 -->
+<section id="s6" class="section">
+<div class="section-title">✨ 우주의 끝? 새로운 시작!</div>
+<p class="section-sub">먼 미래에 대한 두 가지 이야기를 나란히 놓아 봅니다.</p>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('s6','s6t1',this)">과학이 보는 먼 미래</button>
+  <button class="tab-btn" onclick="switchTab('s6','s6t2',this)">성경이 보는 약속</button>
+</div>
+<div id="s6t1" class="tab-panel active">
+<p>아주 먼 미래(지금과는 비교할 수 없이 먼 미래입니다), 별들은 하나씩 연료를 다 쓰고 꺼져갈 거라고 과학자들은 예측합니다. 무섭게 들릴 수 있지만, 이건 내일이나 우리 세대의 이야기가 전혀 아니고, 우주가 얼마나 오래, 크게 지속되는지를 보여주는 숫자일 뿐입니다.</p>
+</div>
+<div id="s6t2" class="tab-panel">
+<div class="gold-box">
+<p>"내가 새 하늘과 새 땅을 창조하나니 이전 것은 기억되거나 마음에 생각나지 아니할 것이라"(사 65:17)</p>
+<p style="margin-top:6px;">"내가 만물을 새롭게 하노라"(계 21:5)</p>
+</div>
+<p style="margin-top:12px;">성경은 우주가 그냥 버려지는 게 아니라 <strong>새롭게 된다</strong>고 약속합니다. 소멸이 아니라 변화라는 것이죠. (창조 세계를 향한 하나님의 돌봄은 ECO 시리즈에서 더 깊이 다룹니다.)</p>
+</div>
+</section>
+
+<!-- S7 -->
+<section id="s7" class="section">
+<div class="section-title">🙏 우주를 보며 예배하기</div>
+<p class="section-sub">경이(驚異)는 예배의 시작일 수 있습니다.</p>
+
+<div class="card">
+<p style="font-style:italic;">"하늘이 하나님의 영광을 선포하고 궁창이 그의 손으로 하신 일을 나타내는도다"</p>
+<p style="font-size:.82rem;color:var(--muted);margin-top:8px;">— 시편 19:1, 개역개정</p>
+</div>
+
+<p>시편 19편을 쓴 사람도 별을 세는 과학자는 아니었지만, 밤하늘을 보며 하나님을 찬양했습니다. 우주의 크기 앞에서 느끼는 "와…" 하는 감탄은, 사실 예배의 아주 오래된 형태입니다.</p>
+
+<div class="info-box">
+<strong>함께 해볼 실천</strong>
+<ul style="margin-top:8px;padding-left:20px;">
+<li>맑은 날 밤, 도시 불빛에서 벗어나 별을 보러 가보세요.</li>
+<li>천체 사진(NASA·JWST 홈페이지)을 찾아보고 감상해보세요.</li>
+<li>천문학자와 우주비행사들을 위해 기도해보세요.</li>
+</ul>
+</div>
+</section>
+
+<!-- S8 -->
+<section id="s8" class="section">
+<div class="section-title">🌟 우주와 신앙을 이야기한 사람들</div>
+<p class="section-sub">과학과 신앙, 두 세계를 함께 살았던 네 사람입니다.</p>
+
+<div class="person-grid">
+  <div class="person-card">
+    <div class="person-emoji">🔭</div>
+    <div class="person-name">갈릴레오 갈릴레이</div>
+    <div class="person-role">천문학자 · 신자</div>
+    <div class="person-work">망원경으로 목성의 위성을 발견</div>
+    <div class="person-desc">교회와 갈등을 겪었지만, 평생 신앙을 버리지 않았습니다. "성경은 하늘에 어떻게 가는지를 알려준다"는 말을 즐겨 인용했습니다.</div>
+  </div>
+  <div class="person-card">
+    <div class="person-emoji">🧠</div>
+    <div class="person-name">알베르트 아인슈타인</div>
+    <div class="person-role">물리학자</div>
+    <div class="person-work">일반상대성이론(1915)</div>
+    <div class="person-desc">전통적 유신론자는 아니었지만, "우주가 이해 가능하다는 것 자체가 가장 이해할 수 없는 일"이라며 우주 앞에서 경탄을 자주 표현했습니다.</div>
+  </div>
+  <div class="person-card">
+    <div class="person-emoji">⛪</div>
+    <div class="person-name">조르주 르메트르</div>
+    <div class="person-role">사제 · 물리학자</div>
+    <div class="person-work">팽창 우주 이론(1927) — '빅뱅의 아버지'</div>
+    <div class="person-desc">허블보다 먼저 우주 팽창을 계산해냈고, 과학과 신앙을 성급하게 섞지 말라고 교황에게 직언한 겸손한 학자였습니다.</div>
+  </div>
+  <div class="person-card">
+    <div class="person-emoji">🌠</div>
+    <div class="person-name">데보라 하스마</div>
+    <div class="person-role">천문학자</div>
+    <div class="person-work">BioLogos 대표</div>
+    <div class="person-desc">은하 연구자이자 그리스도인 과학자로서, 오늘날 과학과 신앙의 건강한 대화를 이끄는 단체를 이끌고 있습니다.</div>
+  </div>
+</div>
+</section>
+
+<!-- S9 (quiz section, kept id s8 nav target but separate quiz block) -->
+<section id="squiz" class="section">
+<div class="section-title">❓ 얼마나 이해했나요?</div>
+<p class="section-sub">10문제로 확인해봐요.</p>
+
+<div id="quiz-section">
+
+<div class="quiz-card"><div class="q-num">문제 1</div>
+<div class="q-text">풍선에 점을 찍고 불면, 점들 사이의 거리는 어떻게 되나요? 이것은 무엇을 비유하나요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(1,'a','c')">① 점들이 서로 가까워진다 — 우주 수축</button>
+<button class="q-opt" onclick="checkQ(1,'b','c')">② 점들이 한 방향으로만 움직인다 — 은하의 회전</button>
+<button class="q-opt" onclick="checkQ(1,'c','c')">③ 점들이 서로 멀어진다 — 우주의 팽창</button>
+<button class="q-opt" onclick="checkQ(1,'d','c')">④ 점들의 색이 변한다 — 별의 진화</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 2</div>
+<div class="q-text">1929년, 멀리 있는 은하일수록 더 빨리 멀어진다는 것을 관측으로 확인한 사람은 누구인가요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(2,'a','a')">① 에드윈 허블</button>
+<button class="q-opt" onclick="checkQ(2,'b','a')">② 아이작 뉴턴</button>
+<button class="q-opt" onclick="checkQ(2,'c','a')">③ 프레드 호일</button>
+<button class="q-opt" onclick="checkQ(2,'d','a')">④ 갈릴레오 갈릴레이</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 3</div>
+<div class="q-text">허블보다 2년 먼저 우주 팽창을 계산해낸, 사제이자 물리학자였던 사람은 누구인가요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(3,'a','b')">① 아인슈타인</button>
+<button class="q-opt" onclick="checkQ(3,'b','b')">② 조르주 르메트르</button>
+<button class="q-opt" onclick="checkQ(3,'c','b')">③ 프레드 호일</button>
+<button class="q-opt" onclick="checkQ(3,'d','b')">④ 스티븐 호킹</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 4</div>
+<div class="q-text">'빅뱅'이라는 이름은 어떻게 생겨났나요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(4,'a','d')">① NASA가 공식적으로 붙인 이름이다</button>
+<button class="q-opt" onclick="checkQ(4,'b','d')">② 성경 구절에서 따온 이름이다</button>
+<button class="q-opt" onclick="checkQ(4,'c','d')">③ 르메트르 자신이 지은 이름이다</button>
+<button class="q-opt" onclick="checkQ(4,'d','d')">④ 반대하던 과학자가 놀리듯 부른 별명이 그대로 굳었다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 5</div>
+<div class="q-text">창세기 1장과 과학은 각각 어떤 질문에 답하나요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(5,'a','a')">① 창세기는 '누가·왜', 과학은 '어떻게·언제'</button>
+<button class="q-opt" onclick="checkQ(5,'b','a')">② 창세기는 '언제', 과학은 '누가'</button>
+<button class="q-opt" onclick="checkQ(5,'c','a')">③ 둘 다 똑같이 '어떻게'를 답한다</button>
+<button class="q-opt" onclick="checkQ(5,'d','a')">④ 둘 다 답이 없는 질문들이다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 6</div>
+<div class="q-text">"성경은 하늘이 어떻게 도는지가 아니라 하늘에 어떻게 가는지를 알려준다"는 말은 무슨 뜻일까요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(6,'a','c')">① 성경은 천문학 교과서라는 뜻이다</button>
+<button class="q-opt" onclick="checkQ(6,'b','c')">② 과학은 틀렸다는 뜻이다</button>
+<button class="q-opt" onclick="checkQ(6,'c','c')">③ 성경의 목적은 구원이지 과학 정보 전달이 아니라는 뜻이다</button>
+<button class="q-opt" onclick="checkQ(6,'d','c')">④ 하늘은 돌지 않는다는 뜻이다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 7</div>
+<div class="q-text">'미세조정'이란 무엇을 뜻하나요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(7,'a','b')">① 우주가 점점 빨리 팽창한다는 뜻</button>
+<button class="q-opt" onclick="checkQ(7,'b','b')">② 몇 가지 물리 상수가 조금만 달랐어도 별과 생명이 존재할 수 없었을 것이라는 뜻</button>
+<button class="q-opt" onclick="checkQ(7,'c','b')">③ 별들이 정확한 시간표대로 태어난다는 뜻</button>
+<button class="q-opt" onclick="checkQ(7,'d','b')">④ 우주에 시작이 없다는 뜻</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 8</div>
+<div class="q-text">"하나님은 누가 만들었어?"라는 질문에 이 시리즈가 제시하는 답의 핵심은 무엇인가요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(8,'a','d')">① 그 질문에는 답이 없으니 하지 말아야 한다</button>
+<button class="q-opt" onclick="checkQ(8,'b','d')">② 하나님도 누군가에 의해 만들어졌다</button>
+<button class="q-opt" onclick="checkQ(8,'c','d')">③ 과학이 언젠가 답을 줄 것이다</button>
+<button class="q-opt" onclick="checkQ(8,'d','d')">④ '원인이 필요하다'는 원리는 시작이 있는 것에만 적용되며, 하나님은 시작이 없는 분이다</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 9</div>
+<div class="q-text">성경이 말하는 우주의 미래는 어떤 모습인가요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(9,'a','a')">① 소멸이 아니라 새롭게 됨(새 하늘과 새 땅)</button>
+<button class="q-opt" onclick="checkQ(9,'b','a')">② 완전히 사라져 없어짐</button>
+<button class="q-opt" onclick="checkQ(9,'c','a')">③ 성경은 우주의 미래에 대해 아무 말도 하지 않는다</button>
+<button class="q-opt" onclick="checkQ(9,'d','a')">④ 다른 우주로 옮겨감</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+<div class="quiz-card"><div class="q-num">문제 10</div>
+<div class="q-text">시편 19편에서 우주를 보는 태도의 핵심은 무엇인가요?</div>
+<div class="q-options">
+<button class="q-opt" onclick="checkQ(10,'a','c')">① 우주의 크기를 계산하는 것</button>
+<button class="q-opt" onclick="checkQ(10,'b','c')">② 우주가 무섭다는 것</button>
+<button class="q-opt" onclick="checkQ(10,'c','c')">③ 하늘이 하나님의 영광을 나타내므로 경이가 곧 예배로 이어진다는 것</button>
+<button class="q-opt" onclick="checkQ(10,'d','c')">④ 별을 보는 것은 시간 낭비라는 것</button>
+</div><div class="q-feedback" style="display:none;"></div></div>
+
+</div>
+
+<div id="score-section" class="score-box">
+<div class="score-num" id="score-num">0</div>
+<div>10문제 중 정답 개수</div>
+</div>
+</section>
+
+<footer>
+  <p>Made by Isaac with Claude | 태초에 — 우주론과 신앙 교육자료 — 청소년 버전</p>
+  <p style="margin-top:6px;"><a href="index.html">← 버전 선택으로</a></p>
+</footer>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function switchTab(section, panelId, btn) {
+  const sec = document.getElementById(section);
+  sec.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  sec.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const arrow = btn.querySelector('.arrow');
+  const isOpen = body.classList.contains('open');
+  if (isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      body.classList.remove('open');
+      body.style.maxHeight = '0';
+    });
+  } else {
+    body.classList.add('open');
+    const _t = body.style.transition;
+    body.style.transition = 'none';
+    body.style.maxHeight = 'none';
+    const target = body.scrollHeight;
+    body.style.maxHeight = '0';
+    void body.offsetHeight;
+    body.style.transition = _t;
+    body.style.maxHeight = target + 'px';
+    body.addEventListener('transitionend', function te(e) {
+      if (e.propertyName !== 'max-height') return;
+      if (body.classList.contains('open')) body.style.maxHeight = 'none';
+      body.removeEventListener('transitionend', te);
+    });
+  }
+  if (arrow) arrow.textContent = isOpen ? '▼' : '▲';
+}
+
+const answered = {};
+let score = 0;
+const TOTAL_Q = 10;
+
+function checkQ(qNum, chosen, correctAns) {
+  if (answered[qNum]) return;
+  answered[qNum] = chosen;
+  if (chosen === correctAns) score++;
+  const letters = ['a','b','c','d'];
+  const card = document.querySelectorAll('#quiz-section .quiz-card')[qNum - 1];
+  const opts = card.querySelectorAll('.q-opt');
+  opts.forEach((opt, i) => {
+    opt.disabled = true;
+    if (letters[i] === correctAns) opt.classList.add('correct');
+    else if (letters[i] === chosen) opt.classList.add('wrong');
+  });
+  const fb = card.querySelector('.q-feedback');
+  fb.textContent = feedbacks[qNum][chosen] || '';
+  fb.style.display = 'block';
+  if (Object.keys(answered).length === TOTAL_Q) {
+    document.getElementById('score-num').textContent = score;
+    document.getElementById('score-section').style.display = 'block';
+  }
+}
+
+const feedbacks = {
+  1: {a:'우주는 수축이 아니라 팽창하고 있어요.', b:'점들은 특정 방향이 아니라 모든 방향으로 멀어집니다.', c:'맞아요! 풍선의 점들처럼, 우주의 은하들도 서로에게서 멀어지고 있어요.', d:'색 변화(적색편이)는 팽창을 확인하는 증거 중 하나이지만, 비유 자체의 답은 아니에요.'},
+  2: {a:'맞아요! 허블은 1929년 은하들의 후퇴 속도와 거리 사이의 관계를 관측으로 확인했어요.', b:'뉴턴은 중력 법칙을 발견했지만, 이 관측을 한 사람은 아니에요.', c:'호일은 오히려 빅뱅 이론에 반대했던 과학자예요.', d:'갈릴레오는 훨씬 이전 시대의 인물이에요.'},
+  3: {a:'아인슈타인은 처음엔 오히려 이 계산을 믿지 않았어요.', b:'맞아요! 르메트르는 사제이자 물리학자로, 1927년 팽창 우주를 계산해냈어요.', c:'호일은 반대편 과학자였어요.', d:'호킹은 훨씬 후대의 인물이에요.'},
+  4: {a:'NASA가 붙인 공식 이름이 아니에요.', b:'성경에서 따온 이름이 아니에요.', c:'르메트르는 오히려 이 이름을 좋아하지 않았어요.', d:'맞아요! 1949년 프레드 호일이 라디오에서 놀리듯 부른 별명이 그대로 굳어버렸어요.'},
+  5: {a:'맞아요! 창세기는 누가·왜를, 과학은 어떻게·언제를 답합니다.', b:'반대로 설명되었어요.', c:'두 질문은 서로 다릅니다.', d:'둘 다 나름의 답을 제시하고 있어요.'},
+  6: {a:'성경은 천문학 교과서가 아니에요.', b:'과학이 틀렸다는 뜻이 아니에요.', c:'맞아요! 성경의 목적은 구원의 길을 알려주는 것이지, 천문학 정보를 주는 게 아니라는 뜻이에요.', d:'하늘의 움직임 자체를 부정하는 말이 아니에요.'},
+  7: {a:'팽창 속도 자체가 아니라 여러 상수의 값이 핵심이에요.', b:'맞아요! 중력, 핵력 같은 상수들이 조금만 달랐어도 별과 생명이 존재할 수 없었다는 뜻이에요.', c:'별의 탄생 시간표에 대한 이야기가 아니에요.', d:'우주에 시작이 없다는 것과는 다른 이야기예요.'},
+  8: {a:'좋은 질문을 피하지 않고 답을 시도하는 것이 이 시리즈의 태도예요.', b:'그렇다면 그것은 성경이 말하는 하나님이 아니에요.', c:'이 질문은 과학이 아니라 논리의 문제예요.', d:'맞아요! 원인이 필요한 것은 "시작이 있는 것"뿐이고, 하나님은 시작이 없는 분이라는 것이 답의 핵심이에요.'},
+  9: {a:'맞아요! 사 65:17과 계 21:5은 소멸이 아니라 새롭게 됨을 약속합니다.', b:'완전한 소멸이 아니라 변화·새로워짐이 성경의 그림이에요.', c:'성경은 새 하늘과 새 땅을 분명히 말합니다.', d:'다른 우주로의 이동이 아니라 이 창조 세계의 새로워짐이에요.'},
+  10: {a:'계산 자체보다 그 앞에서의 태도가 핵심이에요.', b:'무서움이 아니라 경이와 찬양이 시편 19편의 정서예요.', c:'맞아요! 하늘이 하나님의 영광을 나타내고, 그 경이가 예배로 이어진다는 것이 핵심이에요.', d:'시편 19편은 오히려 하늘을 깊이 바라보라고 초대합니다.'}
+};
+</script>
+</body>
+</html>

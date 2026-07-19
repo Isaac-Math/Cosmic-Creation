@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>태초에 — 우주론과 신앙 — 버전 선택</title>
+<style>
+  :root {
+    --co: #453a80;
+    --co-dark: #251d4d;
+    --co-light: #8d84c0;
+    --co-xlight: #e9e6f7;
+    --primary: #2d6a4f;
+    --primary-light: #52b788;
+    --gold: #f4a261;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: linear-gradient(135deg, #14102b 0%, #251d4d 40%, #453a80 100%);
+    color: #fff;
+    padding: 56px 24px 44px;
+    text-align: center;
+  }
+  header .icon { font-size: 3.2rem; display: block; margin-bottom: 14px; }
+  header h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 10px; }
+  header p { opacity: .85; font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+  .badge-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .badge { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 4px 14px; font-size: .82rem; }
+  main {
+    flex: 1; max-width: 820px; margin: 0 auto;
+    padding: 52px 20px 80px; width: 100%;
+  }
+  .choose-label {
+    text-align: center; font-size: .88rem; font-weight: 700;
+    color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px;
+  }
+  .version-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 620px) { .version-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) {
+    header { padding: 36px 16px 28px; }
+    header h1 { font-size: 1.6rem; }
+    main { padding: 32px 14px 60px; }
+    .version-card { padding: 24px 18px 20px; }
+    .v-title { font-size: 1.1rem; }
+    .v-desc { font-size: .88rem; }
+    .v-features li { font-size: .82rem; }
+    .info-box { padding: 16px; flex-direction: column; gap: 10px; }
+  }
+  .version-card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 36px 28px 32px; text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column; gap: 14px;
+    border: 2px solid transparent; transition: all .22s;
+    position: relative; overflow: hidden;
+  }
+  .version-card:hover { transform: translateY(-4px); box-shadow: 0 8px 36px rgba(0,0,0,0.14); }
+  .version-card.middle { border-color: var(--co-light); }
+  .version-card.middle:hover { border-color: var(--co); }
+  .version-card.high { border-color: var(--co); }
+  .version-card.high:hover { border-color: var(--co-dark); }
+  .version-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+  }
+  .version-card.middle::before { background: linear-gradient(90deg, var(--co-light), var(--co)); }
+  .version-card.high::before { background: linear-gradient(90deg, var(--co), var(--co-dark)); }
+  .v-emoji { font-size: 2.8rem; }
+  .v-level { font-size: .78rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+  .version-card.middle .v-level { color: var(--co); }
+  .version-card.high .v-level { color: var(--co-dark); }
+  .v-title { font-size: 1.3rem; font-weight: 800; }
+  .v-desc { font-size: .93rem; color: var(--muted); line-height: 1.7; }
+  .v-features { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .v-features li { font-size: .85rem; display: flex; align-items: flex-start; gap: 7px; }
+  .v-features li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .version-card.middle .v-features li::before { color: var(--co); }
+  .version-card.high .v-features li::before { color: var(--co-dark); }
+  .v-btn {
+    margin-top: auto; display: inline-block; padding: 12px 0; border-radius: 30px;
+    font-size: .92rem; font-weight: 700; text-align: center; transition: opacity .2s;
+  }
+  .version-card.middle .v-btn { background: var(--co); color: #fff; }
+  .version-card.high .v-btn { background: var(--co-dark); color: #fff; }
+  .version-card:hover .v-btn { opacity: .88; }
+  .info-box {
+    background: var(--card); border-radius: var(--radius);
+    padding: 24px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-top: 32px; display: flex; gap: 16px; align-items: flex-start;
+    border-left: 4px solid var(--gold);
+  }
+  .info-box .info-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .info-box p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+  .info-box strong { color: var(--text); }
+  footer {
+    background: var(--co-dark); color: rgba(255,255,255,.75);
+    text-align: center; padding: 20px; font-size: .82rem;
+  }
+  footer a { color: rgba(255,255,255,.9); }
+</style>
+</head>
+<body>
+<div style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+  <a href="https://isaac-math.github.io/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:4px 12px;">← 신앙과 이성 전체</a>
+  <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
+  <span style="color:rgba(255,255,255,.7);font-size:.82rem;">태초에 — 우주론과 신앙</span>
+</div>
+
+<header>
+  <span class="icon">🌌</span>
+  <h1>태초에 — 우주론과 신앙</h1>
+  <p>우주에 시작이 있다는 발견,<br>그 '태초'는 창세기의 태초인가.</p>
+  <div class="badge-row">
+    <span class="badge">💥 빅뱅과 창조</span>
+    <span class="badge">🎚️ 미세조정</span>
+    <span class="badge">🌐 다중우주</span>
+    <span class="badge">✨ 무로부터의 창조</span>
+  </div>
+</header>
+
+<main>
+  <p class="choose-label">버전 선택</p>
+
+  <div class="version-grid">
+
+    <a href="CO_middle.html" class="version-card middle">
+      <span class="v-emoji">🎈</span>
+      <span class="v-level">청소년 버전</span>
+      <span class="v-title">우주에도 생일이 있을까?</span>
+      <p class="v-desc">풍선 우주 비유와 신부님 과학자 르메트르 이야기로 빅뱅을 쉽게 이해합니다. "하나님은 누가 만들었어?"라는 질문에도 정면으로 답합니다.</p>
+      <ul class="v-features">
+        <li>풍선 비유로 이해하는 우주 팽창</li>
+        <li>사제이자 과학자, 르메트르 이야기</li>
+        <li>성경은 과학책이 아니라는 것의 의미</li>
+        <li>골디락스 우주 — 미세조정 쉽게 보기</li>
+        <li>인물 카드 4 + 퀴즈 10문제</li>
+      </ul>
+      <span class="v-btn">청소년 버전으로 →</span>
+    </a>
+
+    <a href="CO_high.html" class="version-card high">
+      <span class="v-emoji">🔭</span>
+      <span class="v-level">대학생 버전</span>
+      <span class="v-title">칼람 논증부터 허블 텐션까지</span>
+      <p class="v-desc">우주론 200년사, 무로부터의 창조 교리사, 칼람 우주론 논증과 미세조정·다중우주 논쟁, DESI·JWST가 열어놓은 현재진행형 균열까지 다룹니다.</p>
+      <ul class="v-features">
+        <li>우주론 200년사 타임라인 + 르메트르 1951년 사건</li>
+        <li>창세기와 고대 근동 우주관, 일치주의 비판</li>
+        <li>아퀴나스의 창조 구별, 칼람 논증 구조 분석</li>
+        <li>미세조정·다중우주 — 최강 반론까지 공정하게</li>
+        <li>학자 9인 카드 + 학술 레퍼런스 + 퀴즈 12문제</li>
+      </ul>
+      <span class="v-btn">대학생 버전으로 →</span>
+    </a>
+
+  </div>
+
+  <div class="info-box">
+    <span class="info-icon">💡</span>
+    <p><strong>이 시리즈에 대해</strong><br>
+    "태초에"는 생물의 기원을 다룬 <strong>EC(진화적 창조)</strong>의 우주적 확장판입니다. "우주에 시작이 있다"는 20세기 최대의 과학적 발견 앞에서, 이 발견이 신학에 무엇을 주고 무엇을 주지 않는지를 정직하게 살핍니다. 빅뱅은 창조 교리의 '증거'가 아니라 '공명'이라는 절제된 시각을 지키며, 특정 연대 해석을 강요하지 않습니다. 청소년 버전으로 경이감을 먼저 느낀 뒤, 대학생 버전에서 논증의 구조를 따라가는 것을 권합니다.</p>
+  </div>
+</main>
+
+<footer>
+  <p>Made by Isaac with Claude | 태초에 — 우주론과 신앙 교육자료</p>
+</footer>
+
+</body>
+</html>
