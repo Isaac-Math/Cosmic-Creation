@@ -790,6 +790,26 @@ const feedbacksH = {
   11: {a:'2026년 현재 완전히 해소되지 않았습니다.', b:'허블 텐션은 실제 측정 불일치입니다.', c:'맞습니다! 새로운 정밀 측정들도 불일치를 재확인·심화시키는 경향을 보이고 있습니다.', d:'ΛCDM 폐기에 대한 합의는 없습니다.'},
   12: {a:'무시가 아니라 정직하게 "논쟁 중"으로 표기하는 것이 목표입니다.', b:'전선의 과학도 교육적으로 중요하게 다뤄야 할 대상입니다.', c:'두 구별은 실제로 중요합니다.', d:'맞습니다! 논쟁 중인 것을 확정된 사실처럼 다루면 지적 정직성이 훼손되고, 나중에 과학이 수정될 때 신앙이 불필요하게 흔들릴 수 있습니다.'}
 };
+
+// 스크롤스파이 — 스크롤 시 현재 섹션에 맞춰 nav 언더바를 이동시킨다(클릭과 공존, 2026-07-19 표준화)
+(function () {
+  const navLinks = document.querySelectorAll('nav a');
+  const map = {};
+  navLinks.forEach(function (a) {
+    const h = a.getAttribute('href');
+    if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
+  });
+  if (!('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && map[e.target.id]) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        map[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(function (sec) { obs.observe(sec); });
+})();
 </script>
 </body>
 </html>
