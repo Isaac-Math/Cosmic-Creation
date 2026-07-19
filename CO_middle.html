@@ -572,6 +572,26 @@ const feedbacks = {
   9: {a:'맞아요! 사 65:17과 계 21:5은 소멸이 아니라 새롭게 됨을 약속합니다.', b:'완전한 소멸이 아니라 변화·새로워짐이 성경의 그림이에요.', c:'성경은 새 하늘과 새 땅을 분명히 말합니다.', d:'다른 우주로의 이동이 아니라 이 창조 세계의 새로워짐이에요.'},
   10: {a:'계산 자체보다 그 앞에서의 태도가 핵심이에요.', b:'무서움이 아니라 경이와 찬양이 시편 19편의 정서예요.', c:'맞아요! 하늘이 하나님의 영광을 나타내고, 그 경이가 예배로 이어진다는 것이 핵심이에요.', d:'시편 19편은 오히려 하늘을 깊이 바라보라고 초대합니다.'}
 };
+
+// 스크롤스파이 — 스크롤 시 현재 섹션에 맞춰 nav 언더바를 이동시킨다(클릭 setActive와 공존)
+(function () {
+  const navLinks = document.querySelectorAll('nav a');
+  const map = {};
+  navLinks.forEach(function (a) {
+    const h = a.getAttribute('href');
+    if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
+  });
+  if (!('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && map[e.target.id]) {
+        navLinks.forEach(function (a) { a.classList.remove('active'); });
+        map[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  document.querySelectorAll('section[id]').forEach(function (sec) { obs.observe(sec); });
+})();
 </script>
 </body>
 </html>
