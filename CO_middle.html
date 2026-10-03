@@ -45,7 +45,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
-         background: var(--bg); color: var(--text); line-height: 1.7; }
+         background: var(--bg); color: var(--text); line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; }
 
   .site-header { background: linear-gradient(135deg, #251d4d 0%, #453a80 100%);
     color: #fff; padding: 48px 24px 36px; text-align: center; }
@@ -111,10 +111,10 @@
   .arrow { font-size: .75rem; color: var(--muted); transition: transform .25s; }
 
   .flip-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 14px; margin-bottom: 20px; }
-  .flip-card { height: 195px; cursor: pointer; perspective: 1000px; }
-  .flip-inner { width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; position: relative; }
+  .flip-card { min-height: 195px; display: grid; cursor: pointer; perspective: 1000px; }
+  .flip-inner { width: 100%; display: grid; transition: transform .5s; transform-style: preserve-3d; position: relative; }
   .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-  .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  .flip-front, .flip-back { grid-area: 1/1; min-width: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden;
     border-radius: var(--radius); display: flex; flex-direction: column;
     align-items: center; justify-content: center; padding: 16px; text-align: center; }
   .flip-front { background: var(--card); border: 2px solid var(--co-xlight); }
@@ -241,7 +241,7 @@
 <p><strong>조르주 르메트르</strong>(1894-1966)는 벨기에의 가톨릭 사제이자 물리학자였습니다. 놀랍게도 그는 허블보다 2년 먼저인 1927년, 수학 계산만으로 우주가 팽창하고 있다는 것을 알아냈습니다. 처음에는 아인슈타인조차 "당신의 계산은 맞지만, 물리학적으로는 끔찍하다"며 믿지 않았어요.</p>
 </div>
 
-<p>그런데 르메트르에게서 정말 인상 깊은 건 다른 부분입니다. 1951년, 교황 비오 12세가 "빅뱅이 성경의 창조를 과학적으로 증명했다!"고 말하려던 순간, 다른 누구도 아닌 르메트르 신부님이 조용히 나서서 이를 만류했다고 전해집니다.</p>
+<p>그런데 르메트르에게서 정말 인상 깊은 건 다른 부분입니다. 1951년, 교황 비오 12세는 한 연설에서 빅뱅 이론이 성경의 창조를 과학적으로 확인해 준 것처럼 말했어요. 그러자 다른 누구도 아닌 르메트르 신부님이 크게 걱정했고, 교황이 이듬해 더 큰 국제 천문학 회의에서 같은 말을 되풀이하지 않도록 조심스럽게 뜻을 전했다고 해요.</p>
 
 <div class="highlight-box">
 르메트르의 뜻은 이런 것이었습니다 — 과학 이론은 언제든 새로운 증거로 바뀔 수 있으니, 신앙을 하나의 과학 이론에 묶어두어서는 안 된다는 것이죠. 이후 교황은 이 주장을 다시 꺼내지 않았습니다.
@@ -393,7 +393,7 @@
     <div class="person-name">조르주 르메트르</div>
     <div class="person-role">사제 · 물리학자</div>
     <div class="person-work">팽창 우주 이론(1927) — '빅뱅의 아버지'</div>
-    <div class="person-desc">허블보다 먼저 우주 팽창을 계산해냈고, 과학과 신앙을 성급하게 섞지 말라고 교황에게 직언한 겸손한 학자였습니다.</div>
+    <div class="person-desc">허블보다 먼저 우주 팽창을 계산해냈고, 과학과 신앙을 성급하게 섞지 말라고 교황청에 조심스럽게 뜻을 전한 겸손한 학자였습니다.</div>
   </div>
   <div class="person-card">
     <div class="person-emoji">🌠</div>
