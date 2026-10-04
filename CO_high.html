@@ -32,7 +32,7 @@
   --primary:#453a80; --primary-light:#8d84c0; --primary-xlight:#e9e6f7; --primary-dark:#251d4d;
   --accent:#e76f51; --sky:#4895ef; --sky-light:#cce5ff;
   --gold:#f4a261; --gold-light:#fde9d4; --purple:#7b2d8b; --purple-light:#e8d5ed;
-  --bg:#f9fafb; --card:#ffffff; --text:#1a1a2e; --muted:#6c757d;
+  --bg:#f9fafb; --card:#ffffff; --text:#1a1a2e; --muted:#5c636a;
   --border:#dee2e6; --radius:12px; --shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -168,11 +168,17 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
   .discuss-card{padding:16px;} .person-card{padding:14px;} .gloss-item{padding:12px;} .heb{font-size:1.05rem;}
   .timeline{padding-left:20px;} .t-item::before{left:-26px;}
 }
+/* 상단 바: 알약 버튼은 한 줄로 유지하고, 경로 문구는 좁은 화면에서 숨긴다 */
+.top-bar a{white-space:nowrap;flex-shrink:0;}
+.top-bar>span:last-child{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+@media(max-width:480px){.top-bar>span:nth-last-child(-n+2){display:none;}}
+/* nav로 이동했을 때 섹션 제목이 고정 nav 밑에 가리지 않게 */
+section[id]{scroll-margin-top:60px;}
 </style>
 </head>
 <body>
 
-<div style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+<div class="top-bar" style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
   <a href="https://faithreason.kr/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
   <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
   <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;
@@ -211,7 +217,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S0 -->
 <section id="s0">
-<div class="section-title">S0 · 도입 — 두 개의 '태초'</div>
+<h2 class="section-title">S0 · 도입 — 두 개의 '태초'</h2>
 <p class="section-subtitle">20세기 과학의 대반전 앞에서</p>
 
 <p>20세기 초까지 물리학의 기본 전제는 우주가 영원하고 정적이라는 것이었다. 아인슈타인조차 1917년 자신의 일반상대성이론 방정식이 우주의 팽창이나 수축을 암시하자, 이를 막기 위해 임의로 '우주상수'라는 항을 추가했다 — 훗날 그는 이를 "내 인생 최대의 실수"라 불렀다고 전해진다. 그러나 1920년대를 지나며 증거는 한 방향을 가리켰다: 우주에는 시작이 있었다.</p>
@@ -230,7 +236,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S1 -->
 <section id="s1">
-<div class="section-title">S1 · 우주론 200년사</div>
+<h2 class="section-title">S1 · 우주론 200년사</h2>
 <p class="section-subtitle">정적 우주에서 팽창하는 우주로</p>
 
 <div class="timeline">
@@ -249,7 +255,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S2 -->
 <section id="s2">
-<div class="section-title">S2 · 르메트르 — 이 시리즈의 인물 축</div>
+<h2 class="section-title">S2 · 르메트르 — 이 시리즈의 인물 축</h2>
 <p class="section-subtitle">사제이자 물리학자, 두 소명을 함께 살다</p>
 
 <p>조르주 르메트르(Georges Lemaître, 1894-1966)는 가톨릭 사제 서품을 받은 동시에 케임브리지와 MIT에서 수학한 물리학자였다. 1927년, 그는 아인슈타인의 방정식으로부터 팽창하는 우주 해를 독립적으로 도출하고, 이를 슬라이퍼 등의 은하 후퇴 속도 관측 자료와 연결시켰다 — 허블의 1929년 관측보다 2년 앞선 것이었다.</p>
@@ -272,7 +278,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S3 -->
 <section id="s3">
-<div class="section-title">S3 · 빅뱅의 증거 삼각대</div>
+<h2 class="section-title">S3 · 빅뱅의 증거 삼각대</h2>
 <p class="section-subtitle">세 가지 독립적 증거가 하나의 결론을 가리킨다</p>
 
 <div class="tab-bar">
@@ -300,7 +306,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S4 -->
 <section id="s4">
-<div class="section-title">S4 · 창세기와 고대 우주관</div>
+<h2 class="section-title">S4 · 창세기와 고대 우주관</h2>
 <p class="section-subtitle">ANE 크로스링크 섹션</p>
 
 <p>창세기 1장의 우주는 고대 근동 세계가 공유하던 3층 우주 표상 안에서 서술된다. 히브리어 본문은 하늘을 다음과 같이 묘사한다.</p>
@@ -332,7 +338,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S5 -->
 <section id="s5">
-<div class="section-title">S5 · 무로부터의 창조(Creatio ex Nihilo)</div>
+<h2 class="section-title">S5 · 무로부터의 창조(Creatio ex Nihilo)</h2>
 <p class="section-subtitle">교리사 섹션</p>
 
 <div class="scripture">
@@ -358,7 +364,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S6 -->
 <section id="s6">
-<div class="section-title">S6 · 칼람 우주론 논증</div>
+<h2 class="section-title">S6 · 칼람 우주론 논증</h2>
 <p class="section-subtitle">구조 분석</p>
 
 <p>'칼람(kalām)'은 중세 이슬람 신학 전통을 가리키며, 이 논증은 11세기 알 가잘리 등에 의해 정교화되었다. 20세기 후반 윌리엄 레인 크레이그가 『The Kalam Cosmological Argument』(1979)를 통해 현대 분석철학의 언어로 부활시켰다.</p>
@@ -394,7 +400,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S7 -->
 <section id="s7">
-<div class="section-title">S7 · 미세조정 — 우주 상수들의 수수께끼</div>
+<h2 class="section-title">S7 · 미세조정 — 우주 상수들의 수수께끼</h2>
 <p class="section-subtitle">몇 개의 숫자가 조금만 달랐다면</p>
 
 <p>마틴 리스는 『Just Six Numbers』(2000)에서 우주의 구조를 결정하는 여섯 개의 근본 상수를 제시했고, 제라인트 루이스와 루크 반스는 『A Fortunate Universe』(2016)에서 이를 더 정교화했다 — 이 책은 반스(유신론자)와 루이스(무신론자)가 공저했다는 사실 자체가 미세조정 논쟁이 순전히 종교적 편향의 문제가 아님을 보여주는 흥미로운 사례다.</p>
@@ -425,7 +431,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S8 -->
 <section id="s8">
-<div class="section-title">S8 · 다중우주 — 위협인가 사변인가</div>
+<h2 class="section-title">S8 · 다중우주 — 위협인가 사변인가</h2>
 <p class="section-subtitle">과학적 지위가 서로 다른 가설들을 구별하기</p>
 
 <p>'다중우주'라는 말은 하나의 균일한 개념이 아니다. 막스 테그마크는 이를 4단계로 분류했다 — 우리 우주보다 먼 영역(1단계), 급팽창 이론이 함의하는 다른 물리상수를 가진 거품우주들(2단계), 양자역학의 다세계 해석(3단계), 수학적으로 가능한 모든 구조(4단계). 급팽창 이론의 일부 모델('영원한 급팽창')과 끈이론의 랜드스케이프(가능한 진공 상태의 방대한 경우의 수)는 2단계 다중우주의 물리학적 근거로 흔히 인용된다.</p>
@@ -447,7 +453,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S9 -->
 <section id="s9">
-<div class="section-title">S9 · 살아있는 우주론 — 현재의 균열들</div>
+<h2 class="section-title">S9 · 살아있는 우주론 — 현재의 균열들</h2>
 <p class="section-subtitle">최신 동향 섹션 (2026년 상반기 기준, 진행 중인 논쟁)</p>
 
 <div class="card gold-card">
@@ -473,7 +479,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S10 -->
 <section id="s10">
-<div class="section-title">S10 · 우주의 끝과 새 창조</div>
+<h2 class="section-title">S10 · 우주의 끝과 새 창조</h2>
 <p class="section-subtitle">종말론 섹션</p>
 
 <p>현재의 우주론적 예측에 따르면, 극히 먼 미래에 별들은 연료를 소진하고(열죽음 시나리오), 혹은 암흑에너지의 성격에 따라 우주가 갈가리 찢어지는 '빅 립' 같은 극적인 종말을 맞을 수도 있다. 이런 시나리오들은 담담하게 서술될 수 있는 물리적 예측이다.</p>
@@ -497,7 +503,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S11 -->
 <section id="s11">
-<div class="section-title">S11 · 과학과 신앙의 관계 유형론</div>
+<h2 class="section-title">S11 · 과학과 신앙의 관계 유형론</h2>
 <p class="section-subtitle">이 시리즈 전체를 관통하는 틀</p>
 
 <p>이언 바버는 과학과 종교의 관계를 네 유형 — 갈등(conflict) · 독립(independence) · 대화(dialogue) · 통합(integration) — 으로 분류한 것으로 유명하다. 이 틀은 유용한 출발점이지만 한계도 있다: 존 헤들리 브룩이 『Science and Religion: Some Historical Perspectives』에서 보여주듯, 실제 역사는 이 네 상자 중 하나로 깔끔하게 분류되지 않는 훨씬 복잡한 개별 사례들의 연속이다(갈릴레오 사건 자체가 좋은 예다 — S1 참조).</p>
@@ -514,7 +520,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S12 -->
 <section id="s12">
-<div class="section-title">S12 · 학자 카드</div>
+<h2 class="section-title">S12 · 학자 카드</h2>
 <p class="section-subtitle">우주론과 신앙의 대화에 참여한 9인</p>
 <div class="person-grid">
 <div class="person-card"><div class="person-name">조르주 르메트르</div><div class="person-role">사제·물리학자 (1894-1966)</div><div class="person-contrib">팽창 우주 해(1927)·원시 원자 가설(1931). '빅뱅의 아버지'이자 이 시리즈의 인물 축.</div></div>
@@ -531,7 +537,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S13 -->
 <section id="s13">
-<div class="section-title">S13 · 용어 사전</div>
+<h2 class="section-title">S13 · 용어 사전</h2>
 <div class="gloss-grid">
 <div class="gloss-item"><div class="gloss-term">빅뱅 / 특이점</div><div class="gloss-def">우주가 뜨겁고 밀도 높은 상태에서 팽창을 시작한 사건과, 그 이론상 시작점.</div></div>
 <div class="gloss-item"><div class="gloss-term">허블-르메트르 법칙</div><div class="gloss-def">은하의 후퇴 속도가 거리에 비례한다는 관측 법칙(2018년 IAU가 이름을 공동 명명으로 개정).</div></div>
@@ -554,7 +560,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S14 -->
 <section id="s14">
-<div class="section-title">S14 · 토론 논제</div>
+<h2 class="section-title">S14 · 토론 논제</h2>
 <div class="discuss-card"><div class="discuss-num">논제 1</div><div class="discuss-q">빅뱅 우주론은 창조 교리의 '증거'인가 '공명'인가 — 1951년 비오 12세와 르메트르의 입장 차를 재연하고 판정하라.</div><div class="discuss-hint">아퀴나스의 존재론적 의존 개념(S5)을 활용해 답을 구성해보라.</div></div>
 <div class="discuss-card"><div class="discuss-num">논제 2</div><div class="discuss-q">아퀴나스의 구별(시간적 시작 vs 존재론적 의존)을 받아들이면 칼람 논증의 신학적 중요성은 줄어드는가?</div><div class="discuss-hint">칼람 논증이 방어하는 것은 정확히 무엇이었는지 S6의 '평가' 상자를 다시 읽어보라.</div></div>
 <div class="discuss-card"><div class="discuss-num">논제 3</div><div class="discuss-q">미세조정 논증에서 다중우주 응답은 설계 가설보다 더 사변적인가, 덜 사변적인가 — 검증 가능성과 단순성 기준으로 평가하라.</div><div class="discuss-hint">테그마크의 4단계 분류 중 어떤 단계를 기준으로 논의하는지에 따라 답이 달라질 수 있다.</div></div>
@@ -565,7 +571,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- S_REF -->
 <section id="s_ref">
-<div class="section-title">📎 학술 레퍼런스</div>
+<h2 class="section-title">📎 학술 레퍼런스</h2>
 <div class="section-subtitle">이 자료에서 참고한 주요 문헌</div>
 
 <div class="ref-group">
@@ -618,7 +624,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:none;}
 
 <!-- QUIZ -->
 <section id="s_quiz">
-<div class="section-title">❓ 심화 퀴즈</div>
+<h2 class="section-title">❓ 심화 퀴즈</h2>
 <div class="section-subtitle">12문제로 이해도를 점검합니다.</div>
 
 <div id="quiz-section-high">
@@ -825,12 +831,21 @@ const feedbacksH = {
     const h = a.getAttribute('href');
     if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
   });
+  // 현재 섹션의 링크가 nav 화면 밖에 있으면 nav만 가로로 움직여 보이게 한다(페이지 세로 스크롤은 건드리지 않음)
+  function showInNav(a) {
+    let box = a.parentElement;
+    while (box && box !== document.body && !(/(auto|scroll)/.test(getComputedStyle(box).overflowX) && box.scrollWidth > box.clientWidth + 1)) box = box.parentElement;
+    if (!box || box === document.body) return;
+    const r = a.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.left < b.left + 8 || r.right > b.right - 8) box.scrollLeft += (r.left - b.left) - (b.width - r.width) / 2;
+  }
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting && map[e.target.id]) {
         navLinks.forEach(function (a) { a.classList.remove('active'); });
         map[e.target.id].classList.add('active');
+        showInNav(map[e.target.id]);
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });

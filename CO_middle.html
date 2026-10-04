@@ -38,7 +38,7 @@
     --bg: #f9fafb;
     --card: #ffffff;
     --text: #1a1a2e;
-    --muted: #6c757d;
+    --muted: #5c636a;
     --border: #dee2e6;
     --radius: 12px;
     --shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -160,11 +160,17 @@
     .person-grid { grid-template-columns: 1fr; }
     .num-cards { grid-template-columns: 1fr 1fr; }
   }
+  /* 상단 바: 알약 버튼은 한 줄로 유지하고, 경로 문구는 좁은 화면에서 숨긴다 */
+  .top-bar a { white-space: nowrap; flex-shrink: 0; }
+  .top-bar > span:last-child { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 480px) { .top-bar > span:nth-last-child(-n+2) { display: none; } }
+  /* nav로 이동했을 때 섹션 제목이 고정 nav 밑에 가리지 않게 */
+  section[id] { scroll-margin-top: 60px; }
 </style>
 </head>
 <body>
 
-<div style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+<div class="top-bar" style="background:#251d4d;padding:10px 20px;display:flex;align-items:center;gap:10px;">
   <a href="https://faithreason.kr/Faith_Reason/" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:4px 12px;">← 전체 시리즈</a>
   <span style="color:rgba(255,255,255,.35);font-size:.8rem;">|</span>
   <a href="index.html" style="color:#fff;text-decoration:none;font-size:.83rem;font-weight:600;
@@ -197,7 +203,7 @@
 
 <!-- S0 -->
 <section id="s0" class="section">
-<div class="section-title">🌌 밤하늘의 질문</div>
+<h2 class="section-title">🌌 밤하늘의 질문</h2>
 <p class="section-sub">밤하늘을 올려다본 적 있나요? 그 크기를 함께 느껴봐요.</p>
 
 <div class="num-cards">
@@ -218,7 +224,7 @@
 
 <!-- S1 -->
 <section id="s1" class="section">
-<div class="section-title">🎈 우주에 시작이 있었다!</div>
+<h2 class="section-title">🎈 우주에 시작이 있었다!</h2>
 <p class="section-sub">우주도 태어난 날이 있다는 걸, 과학자들은 어떻게 알았을까요?</p>
 
 <div class="card">
@@ -234,7 +240,7 @@
 
 <!-- S2 -->
 <section id="s2" class="section">
-<div class="section-title">⛪ 신부님 과학자, 르메트르</div>
+<h2 class="section-title">⛪ 신부님 과학자, 르메트르</h2>
 <p class="section-sub">사제복을 입은 물리학자가 있었습니다.</p>
 
 <div class="card">
@@ -252,7 +258,7 @@
 
 <!-- S3 -->
 <section id="s3" class="section">
-<div class="section-title">📖 성경은 과학책일까?</div>
+<h2 class="section-title">📖 성경은 과학책일까?</h2>
 <p class="section-sub">창세기와 과학은 서로 다른 질문에 답하고 있어요.</p>
 
 <div class="tab-bar">
@@ -273,7 +279,7 @@
 
 <!-- S4 -->
 <section id="s4" class="section">
-<div class="section-title">🎚️ 골디락스 우주</div>
+<h2 class="section-title">🎚️ 골디락스 우주</h2>
 <p class="section-sub">우주를 만드는 다이얼이 있다면? 카드를 눌러 뒤집어 보세요.</p>
 
 <div class="flip-grid">
@@ -308,7 +314,7 @@
 
 <!-- S5 -->
 <section id="s5" class="section">
-<div class="section-title">🤔 "그럼 하나님은 누가 만들었어?"</div>
+<h2 class="section-title">🤔 "그럼 하나님은 누가 만들었어?"</h2>
 <p class="section-sub">아마 한 번쯤 들어봤을, 또는 스스로 물어봤을 질문이죠.</p>
 
 <div class="acc-item">
@@ -327,7 +333,7 @@
 
 <!-- S6 -->
 <section id="s6" class="section">
-<div class="section-title">✨ 우주의 끝? 새로운 시작!</div>
+<h2 class="section-title">✨ 우주의 끝? 새로운 시작!</h2>
 <p class="section-sub">먼 미래에 대한 두 가지 이야기를 나란히 놓아 봅니다.</p>
 
 <div class="tab-bar">
@@ -348,7 +354,7 @@
 
 <!-- S7 -->
 <section id="s7" class="section">
-<div class="section-title">🙏 우주를 보며 예배하기</div>
+<h2 class="section-title">🙏 우주를 보며 예배하기</h2>
 <p class="section-sub">경이(驚異)는 예배의 시작일 수 있습니다.</p>
 
 <div class="card">
@@ -370,7 +376,7 @@
 
 <!-- S8 -->
 <section id="s8" class="section">
-<div class="section-title">🌟 우주와 신앙을 이야기한 사람들</div>
+<h2 class="section-title">🌟 우주와 신앙을 이야기한 사람들</h2>
 <p class="section-sub">과학과 신앙, 두 세계를 함께 살았던 네 사람입니다.</p>
 
 <div class="person-grid">
@@ -407,7 +413,7 @@
 
 <!-- S9 (quiz section, kept id s8 nav target but separate quiz block) -->
 <section id="squiz" class="section">
-<div class="section-title">❓ 얼마나 이해했나요?</div>
+<h2 class="section-title">❓ 얼마나 이해했나요?</h2>
 <p class="section-sub">10문제로 확인해봐요.</p>
 
 <div id="quiz-section">
@@ -604,12 +610,21 @@ const feedbacks = {
     const h = a.getAttribute('href');
     if (h && h.charAt(0) === '#') map[h.slice(1)] = a;
   });
+  // 현재 섹션의 링크가 nav 화면 밖에 있으면 nav만 가로로 움직여 보이게 한다(페이지 세로 스크롤은 건드리지 않음)
+  function showInNav(a) {
+    let box = a.parentElement;
+    while (box && box !== document.body && !(/(auto|scroll)/.test(getComputedStyle(box).overflowX) && box.scrollWidth > box.clientWidth + 1)) box = box.parentElement;
+    if (!box || box === document.body) return;
+    const r = a.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.left < b.left + 8 || r.right > b.right - 8) box.scrollLeft += (r.left - b.left) - (b.width - r.width) / 2;
+  }
   if (!('IntersectionObserver' in window)) return;
   const obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting && map[e.target.id]) {
         navLinks.forEach(function (a) { a.classList.remove('active'); });
         map[e.target.id].classList.add('active');
+        showInNav(map[e.target.id]);
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
